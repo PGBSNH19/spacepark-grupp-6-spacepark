@@ -8,23 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Tejam\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tejam\\OneDrive\\Dokument\\GitHub\\spacepark-grupp-6-spacepark\\spaceparkapi\\spaceparkapi.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
       "projectName": "spaceparkapi",
-      "projectPath": "C:\\Users\\Tejam\\OneDrive\\Dokument\\GitHub\\spacepark-grupp-6-spacepark\\spaceparkapi\\spaceparkapi.csproj",
-      "packagesPath": "C:\\Users\\Tejam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tejam\\OneDrive\\Dokument\\GitHub\\spacepark-grupp-6-spacepark\\spaceparkapi\\obj\\",
+      "projectPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Tejam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -65,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
