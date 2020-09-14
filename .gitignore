@@ -1,2 +1,7 @@
-
-spaceparkapi/obj/project.nuget.cache
+BackEnd/spaceparkapi/obj/
+.vscode/launch.json
+.vscode/tasks.json
+BackEnd/spaceparkapi/obj/Debug/netcoreapp3.1/project.razor.json
+BackEnd/spaceparkapi/obj/Debug/netcoreapp3.1/spaceparkapi.assets.cache
+BackEnd/spaceparkapi/obj/Debug/netcoreapp3.1/spaceparkapi.csprojAssemblyReference.cache
+BackEnd/SpaceParkUnitTest/obj/Debug/netcoreapp3.1/SpaceParkUnitTest.assets.cache
