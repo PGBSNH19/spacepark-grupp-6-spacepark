@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj": {}
+    "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj": {
+    "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
+        "projectUniqueName": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
         "projectName": "spaceparkapi",
-        "projectPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\obj\\",
+        "projectPath": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\spaceparkapi.csproj",
+        "packagesPath": "C:\\Users\\norsh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\spaceparkapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\norsh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -37,6 +37,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -5716,19 +5716,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {}
+    "C:\\Users\\norsh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\SpaceParkUnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\SpaceParkUnitTest.csproj",
       "projectName": "SpaceParkUnitTest",
-      "projectPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\SpaceParkUnitTest.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\OneDrive\\_Programmering\\Teknik_Hogskolan\\2020_HT\\Utveckling av moln\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\obj\\",
+      "projectPath": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\SpaceParkUnitTest.csproj",
+      "packagesPath": "C:\\Users\\norsh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\norsh\\Documents\\Cloud\\spacepark-grupp-6-spacepark\\BackEnd\\SpaceParkUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\norsh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5784,7 +5784,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
