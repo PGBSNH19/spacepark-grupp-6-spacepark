@@ -346,8 +346,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-# ignore
-.BackEnd/spaceparkapi/obj/
-.BackEnd/spaceparkapi/bin/
-.BackEnd/SpaceParkUnitTest/obj/
-.BackEnd/SpaceParkUnitTest/bin/
+obj/
+bin/
