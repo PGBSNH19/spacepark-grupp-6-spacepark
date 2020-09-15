@@ -347,7 +347,7 @@ MigrationBackup/
 .ionide/
 
 # ignore
-BackEnd/spaceparkapi/obj/
-BackEnd/spaceparkapi/bin/
-BackEnd/SpaceParkUnitTest/obj/
-BackEnd/SpaceParkUnitTest/bin/
+.BackEnd/spaceparkapi/obj/
+.BackEnd/spaceparkapi/bin/
+.BackEnd/SpaceParkUnitTest/obj/
+.BackEnd/SpaceParkUnitTest/bin/
