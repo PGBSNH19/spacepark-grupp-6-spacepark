@@ -348,4 +348,4 @@ MigrationBackup/
 
 obj/
 bin/
-.appsettings.Development.json
+BackEnd/spaceparkapi/appsettings.Development.json
