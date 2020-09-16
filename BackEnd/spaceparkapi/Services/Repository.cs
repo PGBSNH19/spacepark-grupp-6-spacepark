@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Services
 {
-    public class Repository : IRepository
+    public class Repository<T> : IRepository<T> where T : class
 
     {
         private readonly SpaceContext _context;
@@ -42,12 +42,6 @@ namespace spaceparkapi.Services
             return entity;
         }
 
-        public async Task<bool> Save()
-        {
-            _logger.LogInformation("Saving changes");
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public async Task<T> Update<T>(T entity) where T : class
         {
             _logger.LogInformation($"Updating object of type {entity.GetType()}");
@@ -56,6 +50,7 @@ namespace spaceparkapi.Services
             return entity;
         }
 
+        
         public async Task<IList<T>> GetAll<T>(params string[] including) where T : class
         {
             _logger.LogInformation($"Fetching entity list of type {typeof(T)} from the database.");
@@ -86,6 +81,13 @@ namespace spaceparkapi.Services
                 });
 
             return await query.FirstOrDefaultAsync();
+        }
+        
+
+        public async Task<bool> Save()
+        {
+            _logger.LogInformation("Saving changes");
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
