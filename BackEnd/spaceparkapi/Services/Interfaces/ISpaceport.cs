@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Services.Interfaces
 {
-    interface ISpaceport
+    public interface ISpaceport : IRepository
     {
     }
 }
