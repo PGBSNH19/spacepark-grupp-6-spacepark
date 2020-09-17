@@ -349,3 +349,7 @@ MigrationBackup/
 obj/
 bin/
 .appsettings.Development.json
+.vscode/settings.json
+BackEnd/spaceparkapi/appsettings.Development.json
+.vscode/launch.json
+.vscode/tasks.json
