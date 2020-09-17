@@ -7,7 +7,7 @@ using spaceparkapi.Services.Interfaces;
 
 namespace spaceparkapi.Services.Repositories
 {
-    public class TravellerRepository : Repository, ITravellerRepository
+    public class TravellerRepository : Repository, ITraveller
     {
         private readonly ILogger<TravellerRepository> _logger;
 
