@@ -28,13 +28,14 @@ namespace spaceparkapi.Controllers
         {
             try
             {
-                var results = await _spaceportRepository.GetAll<SpaceportDto>("ParkingSpots");
+                var results = await _spaceportRepository.GetAll<Spaceport>("ParkingSpots");
+                var spaceportResult = _mapper.Map<SpaceportDto[]>(results);
 
                 if (results == null)
                 {
                     return NotFound($"Could not find any timetables");
                 }
-                return Ok(results);
+                return Ok(spaceportResult);
             }
             catch (Exception e)
             {
