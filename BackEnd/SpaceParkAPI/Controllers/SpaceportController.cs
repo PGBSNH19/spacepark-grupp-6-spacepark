@@ -13,9 +13,9 @@ namespace spaceparkapi.Controllers
     [ApiController]
     public class SpaceportController : ControllerBase
     {
-        private readonly ISpaceport _spaceportRepository;
+        private readonly ISpaceportRepository _spaceportRepository;
 
-        public SpaceportController(ISpaceport repository)
+        public SpaceportController(ISpaceportRepository repository)
         {
             _spaceportRepository = repository;
         }

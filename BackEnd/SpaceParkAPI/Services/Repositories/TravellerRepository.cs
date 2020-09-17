@@ -1,18 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using spaceparkapi.DBContext;
 using spaceparkapi.Services.Interfaces;
 
 namespace spaceparkapi.Services.Repositories
 {
     public class TravellerRepository : Repository, ITraveller
     {
+        private readonly SpaceContext _context;
         private readonly ILogger<TravellerRepository> _logger;
 
-        public TravellerRepository(DBContext.SpaceContext context, ILogger<TravellerRepository> logger) : base(context, logger)
+        public TravellerRepository(SpaceContext context, ILogger<TravellerRepository> logger) : base(context, logger)
         {
+            _context = context;
             _logger = logger;
         }
     }

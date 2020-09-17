@@ -13,9 +13,9 @@ namespace spaceparkapi.Controllers
     [ApiController]
     public class SpaceshipController : ControllerBase
     {
-        private readonly ISpaceship _spaceshipRepository;
+        private readonly ISpaceshipRepository _spaceshipRepository;
 
-        public SpaceshipController(ISpaceship repository)
+        public SpaceshipController(ISpaceshipRepository repository)
         {
             _spaceshipRepository = repository;
         }

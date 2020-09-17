@@ -1,24 +1,19 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using spaceparkapi.DBContext;
-using spaceparkapi.Models;
 using spaceparkapi.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-
-namespace spaceparkapi.Services
+namespace spaceparkapi.Services.Repositories
+{
+    public class SpaceshipRepository : Repository, ISpaceshipRepository
     {
-        public class SpaceshipRepository : Repository, ISpaceship
-        {
-            private readonly ILogger<SpaceshipRepository> _logger;
+        private readonly SpaceContext _context;
+        private readonly ILogger<SpaceshipRepository> _logger;
 
-            public SpaceshipRepository(SpaceContext context, ILogger<SpaceshipRepository> logger) : base(context, logger)
-            {
-                _logger = logger;
-            }
+        public SpaceshipRepository(SpaceContext context, ILogger<SpaceshipRepository> logger) : base(context, logger)
+        {
+            _context = context;
+            _logger = logger;
         }
     }
+}
    

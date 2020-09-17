@@ -1,6 +1,6 @@
 ﻿namespace spaceparkapi.Services.Interfaces
 {
-    public interface ITraveller : IRepository
+    public interface ISpaceshipRepository : IRepository
     {
     }
 }

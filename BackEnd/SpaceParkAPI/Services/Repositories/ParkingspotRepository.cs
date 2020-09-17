@@ -1,14 +1,15 @@
 using Microsoft.Extensions.Logging;
 using spaceparkapi.DBContext;
+using spaceparkapi.Services.Interfaces;
 
-namespace spaceparkapi.Services
+namespace spaceparkapi.Services.Repositories
 {
     public class ParkingspotRepository : Repository, IParkingspotRepository
     {
         private readonly SpaceContext _context;
-        private readonly ILogger _logger;
+        private readonly ILogger<SpaceportRepository> _logger;
 
-        public ParkingspotRepository(SpaceContext context, ILogger logger) : base(context, logger)
+        public ParkingspotRepository(SpaceContext context, ILogger<SpaceportRepository> logger) : base(context, logger)
         {
             _context = context;
             _logger = logger;
