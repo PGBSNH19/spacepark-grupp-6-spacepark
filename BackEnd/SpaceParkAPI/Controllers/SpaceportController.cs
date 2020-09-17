@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using spaceparkapi.Dto;
 using spaceparkapi.Models;
 using spaceparkapi.Services.Interfaces;
 using System;
@@ -14,17 +16,19 @@ namespace spaceparkapi.Controllers
     public class SpaceportController : ControllerBase
     {
         private readonly ISpaceportRepository _spaceportRepository;
+        private readonly IMapper _mapper;
 
-        public SpaceportController(ISpaceportRepository repository)
+        public SpaceportController(ISpaceportRepository repository, IMapper mapper)
         {
             _spaceportRepository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<ActionResult<Spaceport[]>> GetSpaceports()
+        public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
         {
             try
             {
-                var results = await _spaceportRepository.GetAll<Spaceport>("ParkingSpots");
+                var results = await _spaceportRepository.GetAll<SpaceportDto>("ParkingSpots");
 
                 if (results == null)
                 {
