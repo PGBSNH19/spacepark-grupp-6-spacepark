@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Services
 {
-    public class Repository: IRepository
+    public class Repository<T> : IRepository<T> where T : class
 
     {
         private readonly SpaceContext _context;

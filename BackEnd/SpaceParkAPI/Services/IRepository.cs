@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Services
 {
-    public interface IRepository
+    public interface IRepository<T> where T : class
     {
         Task<T> Add<T>(T entity) where T : class;
         Task<T> Update<T>(T entity) where T : class;

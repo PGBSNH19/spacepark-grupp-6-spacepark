@@ -4,7 +4,7 @@ using spaceparkapi.Services.Interfaces;
 
 namespace spaceparkapi.Services.Repositories
 {
-    public class TravellerRepository : Repository, ITraveller
+    public class TravellerRepository : Repository, ITravellerRepository
     {
         private readonly SpaceContext _context;
         private readonly ILogger<TravellerRepository> _logger;
