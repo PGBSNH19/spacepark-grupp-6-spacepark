@@ -1,0 +1,67 @@
+﻿@font-face {
+    font-family: 'Starjedi';
+    src: url('../fonts/Starjedi.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1d1a2a;
+}
+
+.centered-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-section {
+    display: flex;
+    flex-direction: row;
+}
+
+#logo {
+    text-align: center;
+    color: #e6ec38;
+    font-size: 55px;
+    padding-bottom: 20px;
+    font-family: 'Starjedi', sans-serif;
+}
+
+.name-input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 12px;
+    color: #9b9999;
+    padding: 10px 10px 10px 25px;
+    border-radius: 15px;
+    height: 40px;
+    width: 180px;
+    margin-right: 10px;
+    box-shadow: inset 4px 4px 4px #15141e, inset -4px -4px 4px #252135;
+}
+
+.signin-button {
+    outline: none;
+    border: none;
+    height: 37px;
+    width: 125px;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 15px;
+    color: #9b9999;
+    margin-top: 1.5px;
+    text-align: center;
+    background: #252135;
+}
+.signin-button:active {
+    background: #12111a;
+}
