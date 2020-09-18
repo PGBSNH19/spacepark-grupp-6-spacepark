@@ -27,13 +27,13 @@ namespace spaceparkapi.Controllers
         {
             try
             {
-                var results = await _spaceshipRepository.GetAll<SpaceshipDto>("ParkingSpots");
-
+                var results = await _spaceshipRepository.GetAll<Spaceship>("ParkingSpots");
+                var spaceshipResult = _mapper.Map<SpaceshipDto[]>(results);
                 if (results == null)
                 {
                     return NotFound($"Could not find any timetables");
                 }
-                return Ok(results);
+                return Ok(spaceshipResult);
             }
             catch (Exception e)
             {
