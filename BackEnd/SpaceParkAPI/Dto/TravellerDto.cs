@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Dto
 {
-    public class TravellerDo
+    public class TravellerDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
