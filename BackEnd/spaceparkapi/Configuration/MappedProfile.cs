@@ -16,6 +16,8 @@ namespace spaceparkapi.Configuration
                     .ReverseMap();
             CreateMap<Spaceship, SpaceshipDto>()
                    .ReverseMap();
+            CreateMap<Traveller, TravellerDto>()
+                   .ReverseMap();
         }
 
     }
