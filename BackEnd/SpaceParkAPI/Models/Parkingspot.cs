@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace spaceparkapi.Models
 {
@@ -10,8 +11,16 @@ namespace spaceparkapi.Models
     {
         [NotMapped]
         public readonly static int MaxLength = 500;
-        public Spaceport Spaceport { get; set; }
-        public Spaceship ParkedSpaceship { get; set; }
+
+
+        public int? SpaceportId  { get; set; }
+        [ForeignKey("SpaceportId")]
+        public virtual Spaceport Spaceport { get; set; }
+
+
+        public int? ParkedSpaceshipId  { get; set; }
+        [ForeignKey("ParkedSpaceshipId")]
+        public virtual Spaceship ParkedSpaceship { get; set; }
 
 
         public static bool SpaceshipFits(double length)
