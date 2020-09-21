@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using spaceparkapi.Dto;
 using spaceparkapi.Models;
 using spaceparkapi.Services.Interfaces;
 using System;
@@ -14,23 +16,24 @@ namespace spaceparkapi.Controllers
     public class SpaceshipController : ControllerBase
     {
         private readonly ISpaceshipRepository _spaceshipRepository;
-
-        public SpaceshipController(ISpaceshipRepository repository)
+        private readonly IMapper _mapper;
+        public SpaceshipController(ISpaceshipRepository repository, IMapper mapper)
         {
             _spaceshipRepository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<ActionResult<Spaceship[]>> GetSpaceships()
+        public async Task<ActionResult<SpaceshipDto[]>> GetSpaceships()
         {
             try
             {
                 var results = await _spaceshipRepository.GetAll<Spaceship>("ParkingSpots");
-
+                var spaceshipResult = _mapper.Map<SpaceshipDto[]>(results);
                 if (results == null)
                 {
                     return NotFound($"Could not find any timetables");
                 }
-                return Ok(results);
+                return Ok(spaceshipResult);
             }
             catch (Exception e)
             {

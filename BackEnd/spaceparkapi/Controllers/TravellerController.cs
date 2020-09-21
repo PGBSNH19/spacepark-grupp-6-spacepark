@@ -5,7 +5,6 @@ using spaceparkapi.Dto;
 using spaceparkapi.Models;
 using spaceparkapi.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,29 +12,29 @@ namespace spaceparkapi.Controllers
 {
     [Route("api/v1.0/[controller]")]
     [ApiController]
-    public class SpaceportController : ControllerBase
+    public class TravellerController : ControllerBase
     {
-        private readonly ISpaceportRepository _spaceportRepository;
+        private readonly ITravellerRepository _travellerRepository;
         private readonly IMapper _mapper;
 
-        public SpaceportController(ISpaceportRepository repository, IMapper mapper)
+        public TravellerController(ITravellerRepository repository, IMapper mapper)
         {
-            _spaceportRepository = repository;
+            _travellerRepository = repository;
             _mapper = mapper;
         }
 
-        public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
+        public async Task<ActionResult<TravellerDto[]>> GetTravellers()
         {
             try
             {
-                var results = await _spaceportRepository.GetAll<Spaceport>("ParkingSpots");
-                var spaceportResult = _mapper.Map<SpaceportDto[]>(results);
+                var results = await _travellerRepository.GetAll<Traveller>();
+                var mappedResult = _mapper.Map<TravellerDto[]>(results);
 
                 if (results == null)
                 {
-                    return NotFound($"Could not find any timetables");
+                    return NotFound($"Could not find any traveller");
                 }
-                return Ok(spaceportResult);
+                return Ok(mappedResult);
             }
             catch (Exception e)
             {
