@@ -18,6 +18,8 @@ namespace spaceparkapi.Configuration
                    .ReverseMap();
             CreateMap<Traveller, TravellerDto>()
                    .ReverseMap();
+            CreateMap<Parkingspot, ParkingspotDto>()
+                   .ReverseMap();
         }
 
     }
