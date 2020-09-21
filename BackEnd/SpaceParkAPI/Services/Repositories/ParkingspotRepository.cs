@@ -17,6 +17,5 @@ namespace spaceparkapi.Services.Repositories
             _context = context;
             _logger = logger;
         }
-        
     }
 }

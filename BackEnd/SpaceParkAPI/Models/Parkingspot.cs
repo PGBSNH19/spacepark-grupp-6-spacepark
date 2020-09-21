@@ -13,6 +13,7 @@ namespace spaceparkapi.Models
         public Spaceport Spaceport { get; set; }
         public Spaceship ParkedSpaceship { get; set; }
 
+
         public static bool SpaceshipFits(double length)
         {
             if (length > Parkingspot.MaxLength)
