@@ -24,6 +24,30 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
+        // Get all parked spaceships by traveller ID        /api/v1.0/Spaceport/traveller?id=1
+        [HttpGet("traveller")]
+        public async Task<ActionResult<IList<ParkingspotDto>>> GetTravellerParkingspots(int Id)
+        {
+            try
+            {
+                var result = await _spaceportRepository.GetTravellerParkingspots(Id);
+                var mappedResult = _mapper.Map<IList<ParkingspotDto>>(result);
+
+                if (mappedResult == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(mappedResult);
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
+        }
+
         public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
         {
             try
