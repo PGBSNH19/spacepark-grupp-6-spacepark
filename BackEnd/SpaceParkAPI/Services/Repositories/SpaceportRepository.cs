@@ -24,8 +24,7 @@ namespace spaceparkapi.Services.Repositories
 
             var spaceport = await Get<Spaceport>(spaceportId, including);
 
-            //'500' needs to be replaced with Fredriks' new SpaceshipFits()-method in Spaceship-model.
-            return spaceport.ParkingSpots.FirstOrDefault(x => x.ParkedSpaceship == null && spaceship.Length <= 500);
+            return spaceport.ParkingSpots.FirstOrDefault(x => x.ParkedSpaceship == null && Parkingspot.SpaceshipFits(spaceship.Length));
         }
     }
 }
