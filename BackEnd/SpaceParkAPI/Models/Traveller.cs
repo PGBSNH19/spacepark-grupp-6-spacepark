@@ -8,8 +8,7 @@ namespace spaceparkapi.Models
 {
     public class Traveller : BaseEntity
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         public List<Spaceship> Spaceships { get; set; }
     }
 }

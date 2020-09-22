@@ -9,6 +9,7 @@ namespace spaceparkapi.Models
     public class Spaceship : BaseEntity
     {
         public double Length { get; set; }
+        public string Name { get; set; }
         public Traveller Traveller { get; set; }
     }
 }

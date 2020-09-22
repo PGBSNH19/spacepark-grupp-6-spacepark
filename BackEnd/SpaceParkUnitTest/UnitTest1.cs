@@ -49,7 +49,7 @@ namespace SpaceParkUnitTest
             var parkingspotById = spaceshipRepository.GetParkingSpotInfoById(1).Result;
 
             // Assert
-            Assert.AreEqual("Luke", parkingspotById.ParkedSpaceship.Traveller.FirstName);
+            Assert.AreEqual("Luke Skywalker", parkingspotById.ParkedSpaceship.Traveller.Name);
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace SpaceParkUnitTest
             var parkingspotById = spaceshipRepository.GetParkingSpotInfoById(2).Result;
 
             // Assert
-            Assert.AreEqual("Anakin", parkingspotById.ParkedSpaceship.Traveller.FirstName);
+            Assert.AreEqual("Anakin Skywalker", parkingspotById.ParkedSpaceship.Traveller.Name);
         }
 
         [TestMethod]
@@ -153,8 +153,7 @@ namespace SpaceParkUnitTest
                         Traveller = new Traveller()
                         {
                             Id = 1,
-                            FirstName = "Luke",
-                            LastName = "Skywalker"
+                            Name = "Luke Skywalker"
                         }
                     }
                 },
@@ -173,8 +172,7 @@ namespace SpaceParkUnitTest
                         Traveller = new Traveller()
                         {
                             Id = 2,
-                            FirstName = "Anakin",
-                            LastName = "Skywalker"
+                            Name = "Anakin Skywalker"
                         }
                     }
                 },
@@ -193,8 +191,7 @@ namespace SpaceParkUnitTest
                         Traveller = new Traveller()
                         {
                             Id = 2,
-                            FirstName = "Anakin",
-                            LastName = "Skywalker"
+                            Name = "Anakin Skywalker"
                         }
                     }
                 }
