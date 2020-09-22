@@ -49,12 +49,14 @@ namespace spaceparkapi.DBContext
             builder.Entity<Parkingspot>().HasData(new
             {
                 Id = 1,
-                SpaceportId = 500
+                SpaceportId = 500,
+                ParkedSpaceshipId = 1
             },
             new
             {
                 Id = 2,
-                SpaceportId = 500
+                SpaceportId = 500,
+                ParkedSpaceshipId = 2
             });
 
             builder.Entity<Spaceship>().ToTable("Spaceship");
