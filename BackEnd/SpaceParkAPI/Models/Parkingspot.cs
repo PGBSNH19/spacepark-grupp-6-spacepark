@@ -15,13 +15,11 @@ namespace spaceparkapi.Models
 
         public int? SpaceportId  { get; set; }
         [ForeignKey("SpaceportId")]
-        public virtual Spaceport Spaceport { get; set; }
-
+        public Spaceport Spaceport { get; set; }
 
         public int? ParkedSpaceshipId  { get; set; }
         [ForeignKey("ParkedSpaceshipId")]
-        public virtual Spaceship ParkedSpaceship { get; set; }
-
+        public Spaceship ParkedSpaceship { get; set; }
 
         public static bool SpaceshipFits(double length)
         {
