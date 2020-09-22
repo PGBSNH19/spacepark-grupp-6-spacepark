@@ -70,6 +70,70 @@ namespace SpaceParkUnitTest
             Assert.AreEqual("Anakin", parkingspotById.ParkedSpaceship.Traveller.FirstName);
         }
 
+        [TestMethod]
+        public void GetTravellerParkingspots_ValidData_Count2()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            int travellerId = 2;
+            int numberOfVehicles = 2;
+
+            // Act
+            var travellerParkingspots = spaceportRepository.GetTravellerParkingspots(travellerId).Result;
+
+            // Assert
+            Assert.AreEqual(numberOfVehicles, travellerParkingspots.Count);
+        }
+
+        [TestMethod]
+        public void GetTravellerParkingspots_ValidData_Count1()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            int travellerId = 1;
+            int numberOfVehicles = 1;
+
+            // Act
+            var travellerParkingspots = spaceportRepository.GetTravellerParkingspots(travellerId).Result;
+
+            // Assert
+            Assert.AreEqual(numberOfVehicles, travellerParkingspots.Count);
+        }
+
+
+        [TestMethod]
+        public void GetTravellerParkingspots_InvalidTravellerId_Count0()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            int travellerId = 999999999;
+            int numberOfVehicles = 0;
+
+            // Act
+            var travellerParkingspots = spaceportRepository.GetTravellerParkingspots(travellerId).Result;
+
+            // Assert
+            Assert.AreEqual(numberOfVehicles, travellerParkingspots.Count);
+        }
+
         private IList<Parkingspot> GenerateParkingspotData()
         {
             return new List<Parkingspot>
@@ -114,6 +178,26 @@ namespace SpaceParkUnitTest
                         }
                     }
                 },
+                new Parkingspot
+                {
+                    Id = 2,
+                    Spaceport = new Spaceport()
+                    {
+                        Id = 500,
+                        Name = "Test Spaceport"
+                    },
+                    ParkedSpaceship = new Spaceship()
+                    {
+                        Id = 1,
+                        Length = 500,
+                        Traveller = new Traveller()
+                        {
+                            Id = 2,
+                            FirstName = "Anakin",
+                            LastName = "Skywalker"
+                        }
+                    }
+                }
 
             };
         }
