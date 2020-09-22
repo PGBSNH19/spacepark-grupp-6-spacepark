@@ -27,7 +27,7 @@ namespace spaceparkapi.Services.Repositories
             var query = await _context.Parkingspot
                     .Where(parkingspot => parkingspot.Id == id)
                     .Include(parkedSpaceship => parkedSpaceship.ParkedSpaceship)
-                    .Include(spaceport => spaceport.Spaceport)
+                    .Include(traveller => traveller.ParkedSpaceship.Traveller)
                     .FirstOrDefaultAsync();
 
             return query;
