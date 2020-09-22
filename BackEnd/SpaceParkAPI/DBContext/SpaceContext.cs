@@ -34,14 +34,12 @@ namespace spaceparkapi.DBContext
             builder.Entity<Traveller>().HasData(new
             {
                 Id = 1,
-                FirstName = "Luke",
-                LastName = "Skywalker"
+                Name = "Luke Skywalker"
             },
             new
             {
                 Id = 2,
-                FirstName = "Darth",
-                LastName = "Vader"
+                Name = "Darth Vader"
             });
 
             builder.Entity<Parkingspot>().ToTable("Parkingspot");

@@ -8,8 +8,7 @@ namespace spaceparkapi.Dto
 {
     public class TravellerDto
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         public List<SpaceshipDto> Spaceships { get; set; }
     }
 }
