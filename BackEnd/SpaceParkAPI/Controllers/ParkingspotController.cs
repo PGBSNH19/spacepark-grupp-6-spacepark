@@ -24,8 +24,8 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
         
-        [HttpGet("{id}", Name = "GetIdAsync")]
-        public async Task<ActionResult<ParkingspotDto>> GetById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ParkingspotDto>> GetParkingspotById(int id)
         {
             try
             {
@@ -46,29 +46,42 @@ namespace spaceparkapi.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
         }
-
-        [HttpPost]
-        public async Task<ActionResult<Parkingspot>> ParkShip(Parkingspot parkingspot)
+        
+        // Checkout a parked spaceship using only the parkingspot id.        /api/v1.0/Parkingspot/checkout?parkingId=1
+        [HttpPut("checkout")]
+        public async Task<ActionResult> CheckoutParkedSpaceship(int parkingId)
         {
             try
             {
-                await _parkingspotRepository.Add(parkingspot);
-                return Created($"/api/v1.0/Parkingspot/{parkingspot.Id}", parkingspot);
+                var parkingspot = new Parkingspot()
+                {
+                    Id = parkingId,
+                    SpaceportId = 500,
+                    ParkedSpaceship = null
+                };
+                await _parkingspotRepository.Update<Parkingspot>(parkingspot);
+                return Ok(parkingspot);
             }
             catch(Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
             }
         }
-
         
-        [HttpDelete("{parkingId}")]
-        public async Task<ActionResult> DeleteParkedShip(int parkingId)
+        // Park a spaceship using the parkingspot id and spaceship id.      /api/v1.0/Parkingspot/park?parkingId=1&spaceshipId=1
+        [HttpPut("park")]
+        public async Task<ActionResult> ParkSpaceship(int parkingId, int spaceshipId)
         {
             try
             {
-                await _parkingspotRepository.Delete<Parkingspot>(parkingId);
-                return NoContent();
+                var parkingspot = new Parkingspot()
+                {
+                    Id = parkingId,
+                    SpaceportId = 500,
+                    ParkedSpaceshipId = spaceshipId
+                };
+                await _parkingspotRepository.Update<Parkingspot>(parkingspot);
+                return Ok(parkingspot);
             }
             catch(Exception e)
             {
