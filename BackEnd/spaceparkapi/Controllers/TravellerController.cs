@@ -23,6 +23,36 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("Auth")]
+        public async Task<ActionResult<TravellerDto>> AuthenticateTraveller([FromHeader] string name)
+        {
+            try
+            {
+                if (name == null)
+                    return BadRequest("Please enter traveller name.");
+
+                bool isFamous = await _travellerRepository.IsFamous(name);
+
+                if (!isFamous)
+                    return Unauthorized("Traveller " + name + " has not been in a Starwars movie.");
+
+                Traveller traveller = _travellerRepository.GetTravellerByName(name).Result;
+
+                if (traveller == null)
+                {
+                    traveller = _travellerRepository.RegisterTraveller(name).Result;
+                }
+
+                var newTraveller = _mapper.Map<TravellerDto>(traveller);
+
+                return Ok(newTraveller);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Exception: {e.Message}");
+            }
+        }
+
         public async Task<ActionResult<TravellerDto[]>> GetTravellers()
         {
             try
@@ -38,7 +68,7 @@ namespace spaceparkapi.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Exception: {e.Message}");
             }
         }
     }
