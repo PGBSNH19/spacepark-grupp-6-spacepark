@@ -27,15 +27,22 @@ namespace SpaceparkWebApp.Pages
 
         public async Task<ActionResult> OnPostAsync()
         {
-            Name = Request.Form[nameof(Name)];
+            try
+            {
+                Name = Request.Form[nameof(Name)];
 
-            var url = "https://localhost:44366/api/v1.0/traveller/auth";
-            _client.DefaultRequestHeaders.Add("name", "" + Name);
-            var response = await _client.GetStringAsync(url);
+                var url = "https://localhost:44366/api/v1.0/traveller/auth";
+                _client.DefaultRequestHeaders.Add("name", "" + Name);
+                var response = await _client.GetStringAsync(url);
+
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("Error");
+            }
 
             //var jsonObject = result.FirstOrDefault().ToString();
-
-            return Page();
         }
     }
 }
