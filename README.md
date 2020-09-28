@@ -1,0 +1,1 @@
+[![Build Status](https://dev.azure.com/norshiervani0999/Spaceport/_apis/build/status/PGBSNH19.spacepark-grupp-6-spacepark?branchName=master)](https://dev.azure.com/norshiervani0999/Spaceport/_build/latest?definitionId=8&branchName=master)
