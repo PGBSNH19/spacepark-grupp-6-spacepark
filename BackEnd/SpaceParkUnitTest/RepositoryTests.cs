@@ -6,34 +6,13 @@ using Moq.EntityFrameworkCore;
 using spaceparkapi.DBContext;
 using spaceparkapi.Models;
 using Moq;
-
+using System.Linq;
 
 namespace SpaceParkUnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class RepositoryTests
     {
-        [TestMethod]
-        public void SpaceshipFits_TooBig_False()
-        {
-            var shipFits = Parkingspot.SpaceshipFits(999999999);
-            Assert.IsFalse(shipFits);
-        }
-
-        [TestMethod]
-        public void SpaceshipFits_Smaller_True()
-        {
-            var shipFits = Parkingspot.SpaceshipFits(1);
-            Assert.IsTrue(shipFits);
-        }
-
-        [TestMethod]
-        public void SpaceshipFits_SameSize_True()
-        {
-            var shipFits = Parkingspot.SpaceshipFits(Parkingspot.MaxLength);
-            Assert.IsTrue(shipFits);
-        }
-
         [TestMethod]
         public void GetSpaceShipInfoById_ValidData_ParkedSpaceship1OwnerEquals()
         {
@@ -134,18 +113,33 @@ namespace SpaceParkUnitTest
             Assert.AreEqual(numberOfVehicles, travellerParkingspots.Count);
         }
 
+        private IList<Spaceport> GenerateSpaceportData()
+        {
+            return new List<Spaceport>
+            {
+                new Spaceport
+                {
+                    Id = 500,
+                    Name = "Test Spaceport",
+                    ParkingSpots = GenerateParkingspotData().ToList()
+                }
+            };
+        }
+
         private IList<Parkingspot> GenerateParkingspotData()
         {
+            var spaceport = new Spaceport()
+                {
+                    Id = 500,
+                    Name = "Test Spaceport"
+                };
+
             return new List<Parkingspot>
             {
                 new Parkingspot
                 {
                     Id = 1,
-                    Spaceport = new Spaceport()
-                    {
-                        Id = 500,
-                        Name = "Test Spaceport"
-                    },
+                    Spaceport = spaceport,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 1,
@@ -160,11 +154,7 @@ namespace SpaceParkUnitTest
                 new Parkingspot
                 {
                     Id = 2,
-                    Spaceport = new Spaceport()
-                    {
-                        Id = 500,
-                        Name = "Test Spaceport"
-                    },
+                    Spaceport = spaceport,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 2,
@@ -179,11 +169,7 @@ namespace SpaceParkUnitTest
                 new Parkingspot
                 {
                     Id = 2,
-                    Spaceport = new Spaceport()
-                    {
-                        Id = 500,
-                        Name = "Test Spaceport"
-                    },
+                    Spaceport = spaceport,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 1,
@@ -194,8 +180,16 @@ namespace SpaceParkUnitTest
                             Name = "Anakin Skywalker"
                         }
                     }
+                },
+                new Parkingspot
+                {
+                    Id = 24,
+                    Spaceport = spaceport,
+                    ParkedSpaceship = new Spaceship()
+                    {
+                        Traveller = new Traveller()
+                    }
                 }
-
             };
         }
     }
