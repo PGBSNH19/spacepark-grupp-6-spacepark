@@ -15,7 +15,8 @@ variables:
   containerRegistry: 'ovning2.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/BackEnd/DockerFile'
   tag: '$(Build.BuildId)'
-  backendFolder: '$(Build.SourcesDirectory)/BackEnd'
+  apiFolder: '$(Build.SourcesDirectory)/BackEnd/SpaceParkAPI'
+  testFolder: '$(Build.SourcesDirectory)/BackEnd/SpaceParkUnitTest'
 
   
   # Agent VM image name
@@ -31,11 +32,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: DotNetCoreCLI@2
-      displayName: Publishes our API to a folder in SpaceParkAPI.
+      displayName: Builds our Web API and tests
       inputs:
-        command: publish
-        projects: $(backendFolder)/SpaceParkAPI
-        arguments: '-o $(backendFolder)/SpaceParkAPI/publish'
+        command: 'build'
+        projects: |
+          $(apiFolder)/spaceparkapi.csproj
+          $(testFolder)/SpaceParkUnitTest.csproj
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
