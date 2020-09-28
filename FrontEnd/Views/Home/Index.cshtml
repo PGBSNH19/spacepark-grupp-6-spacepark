@@ -1,0 +1,23 @@
+﻿@model SpaceparkWebApp.Models.LogInUser
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/spaceportstyle.css" />
+    <script src="~/js/script.js"></script>
+</head>
+
+<body>
+    @using (Html.BeginForm("Authenticate", "Home", FormMethod.Post))
+    {
+        <div class="centered-section">
+            <div id="logo">SpacePark</div>
+            <div class="login-section">
+                @Html.TextBoxFor(model => model.Name, new { @class = "name-input", placeholder = "Firstname" });
+                <button asp-for="submit" class="signin-button">Authenticate</button>
+            </div>
+        </div>
+    }
+</body>
