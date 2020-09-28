@@ -1,8 +1,7 @@
-﻿@page
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model SpaceparkWebApp.Pages.IndexModel
+﻿@model SpaceparkWebApp.Models.LogInUser
+
 @{
-    ViewData["Title"] = "Auth";
+    ViewBag.Title = "Home Page";
 }
 
 <head>
@@ -11,13 +10,14 @@
 </head>
 
 <body>
-    <form method="post">
+    @using (Html.BeginForm("Authenticate", "Home", FormMethod.Post))
+    {
         <div class="centered-section">
-            <div id="logo">spacepark</div>
+            <div id="logo">SpacePark</div>
             <div class="login-section">
-                <input asp-for="Name" type="text" class="name-input" spellcheck="false" placeholder="Firstname" />
+                @Html.TextBoxFor(model => model.Name, new { @class = "name-input", placeholder = "Firstname" });
                 <button asp-for="submit" class="signin-button">Authenticate</button>
             </div>
         </div>
-    </form>
+    }
 </body>
