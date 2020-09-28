@@ -15,6 +15,7 @@ variables:
   containerRegistry: 'ovning2.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/BackEnd/DockerFile'
   tag: '$(Build.BuildId)'
+  publishFolder: '$(Build.SourcesDirectory)/BackEnd/SpaceParkAPI/publish'
 
   
   # Agent VM image name
@@ -33,7 +34,7 @@ stages:
       displayName: Publishes our API to a folder in SpaceParkAPI.
       inputs:
         command: publish
-        arguments: 'dotnet publish -o ./SpaceParkAPI/publish'
+        arguments: 'dotnet publish -o $(publishFolder)'
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
