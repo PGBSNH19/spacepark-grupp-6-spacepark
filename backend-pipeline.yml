@@ -15,7 +15,7 @@ variables:
   containerRegistry: 'ovning2.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/BackEnd/DockerFile'
   tag: '$(Build.BuildId)'
-  backendFolder: '$(Build.SourcesDirectory)/BackEnd/SpaceParkAPI'
+  backendFolder: '$(Build.SourcesDirectory)/BackEnd'
 
   
   # Agent VM image name
