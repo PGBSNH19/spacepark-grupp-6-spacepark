@@ -49,13 +49,13 @@ namespace spaceparkapi.Controllers
         }
 
 
-        // Get all free parking spots        /api/v1.0/Spaceport/GetFreeParkingSpots
+        // Get all free parking spots        /api/v1.0/Spaceport/GetFreeParkingSpots?spaceshipLength=200
         [HttpGet("GetFreeParkingSpots")]
-        public async Task<ActionResult<IList<ParkingspotDto>>> GetAllAvailableParkingspots()
+        public async Task<ActionResult<IList<ParkingspotDto>>> GetAllAvailableParkingspots(int spaceshipLength)
         {
             try
             {
-                var result = await _spaceportRepository.GetAllAvailableParkingspots();
+                var result = await _spaceportRepository.GetAllAvailableParkingspots(spaceshipLength);
                 var mappedResult = _mapper.Map<IList<ParkingspotDto>>(result);
 
                 if (mappedResult == null)

@@ -8,6 +8,6 @@ namespace spaceparkapi.Services.Interfaces
     {
         Task<IList<Parkingspot>> GetTravellerParkingspots(int travellerId);
         Task<Parkingspot> GetAvailableParkingspot(int spaceportId, int spaceshipLength);
-        Task<IList<Parkingspot>> GetAllAvailableParkingspots();
+        Task<IList<Parkingspot>> GetAllAvailableParkingspots(int spaceshipLength);
     }
 }
