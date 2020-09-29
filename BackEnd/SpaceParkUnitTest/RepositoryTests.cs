@@ -13,8 +13,10 @@ namespace SpaceParkUnitTest
     [TestClass]
     public class RepositoryTests
     {
+        #region                             ParkingspotRepository  
+
         [TestMethod]
-        public void GetSpaceShipInfoById_ValidData_ParkedSpaceship1OwnerEquals()
+        public void GetParkingSpotInfoById_ValidData_ParkedSpaceship1OwnerEquals()
         {
             // Arrange
             IList<Parkingspot> parkingspots = GenerateParkingspotData();
@@ -32,7 +34,7 @@ namespace SpaceParkUnitTest
         }
 
         [TestMethod]
-        public void GetSpaceShipInfoById_ValidData_ParkedSpaceship2OwnerEquals()
+        public void GetParkingSpotInfoById_ValidData_ParkedSpaceship2OwnerEquals()
         {
             // Arrange
             IList<Parkingspot> parkingspots = GenerateParkingspotData();
@@ -48,6 +50,28 @@ namespace SpaceParkUnitTest
             // Assert
             Assert.AreEqual("Anakin Skywalker", parkingspotById.ParkedSpaceship.Traveller.Name);
         }
+
+        [TestMethod]
+        public void GetParkingSpotInfoById_InvalidParkingspotIdId_IsNull()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<ParkingspotRepository>>();
+            var spaceshipRepository = new ParkingspotRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var parkingspotById = spaceshipRepository.GetParkingSpotInfoById(99999).Result;
+
+            // Assert
+            Assert.IsNull(parkingspotById);
+        }
+
+        #endregion  
+
+        #region                             SpaceportRepository
 
         [TestMethod]
         public void GetTravellerParkingspots_ValidData_Count2()
@@ -113,6 +137,9 @@ namespace SpaceParkUnitTest
             Assert.AreEqual(numberOfVehicles, travellerParkingspots.Count);
         }
 
+        #endregion
+
+
         private IList<Spaceport> GenerateSpaceportData()
         {
             return new List<Spaceport>
@@ -122,11 +149,17 @@ namespace SpaceParkUnitTest
                     Id = 500,
                     Name = "Test Spaceport",
                     ParkingSpots = GenerateParkingspotData().ToList()
+                },
+                new Spaceport
+                {
+                    Id = 600,
+                    Name = "Tester Port Two",
+                    ParkingSpots = GenerateParkingspotData().ToList()
                 }
             };
         }
 
-        private IList<Parkingspot> GenerateParkingspotData()
+        public static IList<Parkingspot> GenerateParkingspotData()
         {
             var spaceport = new Spaceport()
                 {
