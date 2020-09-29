@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace spaceparkapi.Configuration
+namespace spaceparkapi.Mapping
 {
     public class MappedProfile : Profile
     {

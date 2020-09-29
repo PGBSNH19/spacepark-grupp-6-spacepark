@@ -38,7 +38,7 @@ namespace spaceparkapi
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new Configuration.MappedProfile());
+                mc.AddProfile(new MappedProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
