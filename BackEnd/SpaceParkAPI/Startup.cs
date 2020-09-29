@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using spaceparkapi.DBContext;
+using spaceparkapi.Mapping;
 using spaceparkapi.Services;
 using spaceparkapi.Services.Interfaces;
 using spaceparkapi.Services.Repositories;
