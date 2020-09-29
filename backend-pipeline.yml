@@ -9,7 +9,6 @@ resources:
 - repo: self
 
 variables:
-  group: SpaceportVariables
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'cce69a0c-b1d9-4f54-a6d0-666d6bea7ac1'
   imageRepository: 'spaceparkimage'
@@ -32,6 +31,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: 'myResourceGroupConnection'
+        KeyVaultName: 'spaceportvault'
+        SecretsFilter: '*'
+        RunAsPreJob: true
     - task: replacetokens@3
       displayName: 'Replace tokens in appsettings folder'
       inputs:
