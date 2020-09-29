@@ -9,6 +9,7 @@ resources:
 - repo: self
 
 variables:
+  group: SpaceportVariables
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'cce69a0c-b1d9-4f54-a6d0-666d6bea7ac1'
   imageRepository: 'spaceparkimage'
@@ -31,6 +32,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - task: replacetokens@3
+      displayName: 'Replace tokens in appsettings folder'
+      inputs:
+        targetFiles: $(apiFolder)/appsettings.json
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
     - task: DotNetCoreCLI@2
       displayName: Builds our Web API and tests
       inputs:
