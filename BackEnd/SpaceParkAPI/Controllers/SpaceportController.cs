@@ -24,6 +24,55 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
+        // Get first free parkingspot                        /api/v1.0/Spaceport/GetParkingSpot?spaceshipLength=200
+        [HttpGet("GetParkingSpot")]
+        public async Task<ActionResult<ParkingspotDto>> GetAvailableParkingspot(int spaceshipLength, int spaceportId = 500)
+        {
+            try
+            {
+                var result = await _spaceportRepository.GetAvailableParkingspot(spaceportId, spaceshipLength);
+                var mappedResult = _mapper.Map<ParkingspotDto>(result);
+
+                if (mappedResult == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(mappedResult);
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
+        }
+
+
+        // Get all free parking spots        /api/v1.0/Spaceport/GetFreeParkingSpots?spaceshipLength=200
+        [HttpGet("GetFreeParkingSpots")]
+        public async Task<ActionResult<IList<ParkingspotDto>>> GetAllAvailableParkingspots(int spaceshipLength)
+        {
+            try
+            {
+                var result = await _spaceportRepository.GetAllAvailableParkingspots(spaceshipLength);
+                var mappedResult = _mapper.Map<IList<ParkingspotDto>>(result);
+
+                if (mappedResult == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(mappedResult);
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
+        }
+
         // Get all parked spaceships by traveller ID        /api/v1.0/Spaceport/traveller?id=1
         [HttpGet("traveller")]
         public async Task<ActionResult<IList<ParkingspotDto>>> GetTravellerParkingspots(int Id)

@@ -20,13 +20,26 @@ namespace spaceparkapi.Services.Repositories
             _logger = logger;
         }
 
-        public async Task<Parkingspot> GetAvailableParkingspot(int spaceportId, Spaceship spaceship, params string[] including)
+        public async Task<IList<Parkingspot>> GetAllAvailableParkingspots(int spaceshipLength)
+        {
+            _logger.LogInformation($"Fetching all available parkingspots");
+
+            var parkingspots = await _context.Parkingspot
+                    .Where(parkingspot => parkingspot.ParkedSpaceship == null && Parkingspot.SpaceshipFits(spaceshipLength))
+                    .ToListAsync();
+
+            return parkingspots;
+        }
+
+        public async Task<Parkingspot> GetAvailableParkingspot(int spaceportId, int spaceshipLength)
         {
             _logger.LogInformation($"Fetching available parkingspot from the spaceport.");
 
-            var spaceport = await Get<Spaceport>(spaceportId, including);
+            var parkingspot = await _context.Parkingspot
+                    .Where(z => z.ParkedSpaceship == null && Parkingspot.SpaceshipFits(spaceshipLength) && z.SpaceportId == spaceportId)
+                    .FirstOrDefaultAsync();
 
-            return spaceport.ParkingSpots.FirstOrDefault(x => x.ParkedSpaceship == null && Parkingspot.SpaceshipFits(spaceship.Length));
+            return parkingspot;
         }
 
         public async Task<IList<Parkingspot>> GetTravellerParkingspots(int travellerId)
