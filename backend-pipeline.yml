@@ -45,11 +45,11 @@ stages:
           $(apiFolder)/spaceparkapi.csproj
           $(testFolder)/SpaceParkUnitTest.csproj
     - task: replacetokens@3
-      displayName: 'Replace tokens in appsettings folder'
       inputs:
-        targetFiles: $(apiFolder)/appsettings.json
+        targetFiles: '**/*.json'
         tokenPrefix: '#{'
         tokenSuffix: '}#'
+        verbosity: detailed
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
