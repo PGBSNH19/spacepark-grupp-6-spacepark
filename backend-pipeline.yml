@@ -50,6 +50,11 @@ stages:
         tokenPrefix: '#{'
         tokenSuffix: '}#'
         verbosity: detailed
+    - task: "DotNetCoreCLI@2"
+      displayName: Run unit tests of the project
+      inputs:
+        command: test
+        projects: $(testFolder) 
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
