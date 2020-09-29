@@ -1,4 +1,13 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 
-WORKDIR /app 
-COPY ./SpaceParkAPI/publish/ . 
-ENTRYPOINT ["dotnet", "spaceparkapi.dll"]
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+ENV ASPNETCORE_URLS=http://+:80  
+EXPOSE 80
+WORKDIR /app
+
+# Copy API project folder
+COPY ./SpaceParkAPI ./
+
+# Publish our API to a new folder
+RUN dotnet publish ./spaceparkapi.csproj -o ./publish
+
+# Run published API
+ENTRYPOINT ["dotnet", "./publish/spaceparkapi.dll"]
