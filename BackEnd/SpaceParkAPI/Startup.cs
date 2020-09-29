@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using spaceparkapi.Configuration;
 using spaceparkapi.DBContext;
 using spaceparkapi.Services;
 using spaceparkapi.Services.Interfaces;
@@ -39,7 +38,7 @@ namespace spaceparkapi
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappedProfile());
+                mc.AddProfile(new Configuration.MappedProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
