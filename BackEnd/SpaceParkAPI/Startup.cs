@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using spaceparkapi.Configuration;
 using spaceparkapi.DBContext;
 using spaceparkapi.Services;
 using spaceparkapi.Services.Interfaces;
@@ -36,14 +37,20 @@ namespace spaceparkapi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappedProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-
-            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IParkingspotRepository, ParkingspotRepository>();
             services.AddScoped<ISpaceportRepository, SpaceportRepository>();
