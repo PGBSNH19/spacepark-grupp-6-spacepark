@@ -23,6 +23,7 @@ namespace spaceparkapi.Controllers
             _parkingspotRepository = parkingspotRepository;
             _mapper = mapper;
         }
+
         
         [HttpGet("{id}")]
         public async Task<ActionResult<ParkingspotDto>> GetParkingspotById(int id)
@@ -34,7 +35,7 @@ namespace spaceparkapi.Controllers
 
                 if (mappedResult == null)
                 {
-                    return NotFound();
+                    return NotFound($"Could not find any parkingspot");
                 }
                 else
                 {

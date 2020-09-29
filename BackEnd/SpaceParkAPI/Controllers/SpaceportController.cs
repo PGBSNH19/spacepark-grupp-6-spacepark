@@ -35,7 +35,7 @@ namespace spaceparkapi.Controllers
 
                 if (mappedResult == null)
                 {
-                    return NotFound();
+                    return NotFound($"Could not find any parked spaceship");
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace spaceparkapi.Controllers
 
                 if (results == null)
                 {
-                    return NotFound($"Could not find any timetables");
+                    return NotFound($"Could not find any spaceport");
                 }
                 return Ok(spaceportResult);
             }
