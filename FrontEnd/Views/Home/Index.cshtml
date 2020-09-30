@@ -11,11 +11,26 @@
 <body>
     @using (Html.BeginForm("Authenticate", "Home", FormMethod.Post))
     {
+        @if (@TempData["msg"] != null)
+        {
+            <div class="alert alert-warning alert alert-dismissible mt-5" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5><strong>Warning</strong></h5><h5>@TempData["msg"]</h5>
+
+            </div>
+        }
         <div class="centered-section">
             <div id="logo">SpacePark</div>
             <div class="login-section">
-                @Html.TextBoxFor(model => model.Name, new { @class = "name-input", placeholder = "Name", 
-                @spellcheck = "false", @autocomplete = "off" })
+                @Html.TextBoxFor(model => model.Name, new
+                {
+                    @class = "name-input",
+                    placeholder = "Name",
+                    @spellcheck = "false",
+                    @autocomplete = "off"
+                })
                 <button asp-for="submit" class="signin-button">Authenticate</button>
             </div>
         </div>
