@@ -24,7 +24,29 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
-        
+        [HttpGet]
+        public async Task<ActionResult<ParkingspotDto[]>> GetParkingspots()
+        {
+            try
+            {
+                var results = await _parkingspotRepository.GetAll<Parkingspot>();
+                var mappedResult = _mapper.Map<ParkingspotDto[]>(results);
+
+                if (mappedResult == null)
+                {
+                    return NotFound($"Could not find any parkingspot");
+                }
+                else
+                {
+                    return Ok(mappedResult);
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ParkingspotDto>> GetParkingspotById(int id)
         {
@@ -46,7 +68,8 @@ namespace spaceparkapi.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
-        }
+        }        
+        
         
         // Checkout a parked spaceship using only the parkingspot id. (spacePortId is optional)        /api/v1.0/Parkingspot/checkout?parkingId=1&spacePortId=500
         [HttpPut("checkout")]

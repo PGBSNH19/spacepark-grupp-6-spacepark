@@ -57,10 +57,30 @@ namespace spaceparkapi.Controllers
         {
             try
             {
-                var results = await _travellerRepository.GetAll<Traveller>();
+                var results = await _travellerRepository.GetAll<Traveller>("Spaceships");
                 var mappedResult = _mapper.Map<TravellerDto[]>(results);
 
                 if (results == null)
+                {
+                    return NotFound($"Could not find any traveller");
+                }
+                return Ok(mappedResult);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Exception: {e.Message}");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TravellerDto>> GetTravellerById(int id)
+        {
+            try
+            {
+                var result = await _travellerRepository.Get<Traveller>(id);
+                var mappedResult = _mapper.Map<TravellerDto>(result);
+
+                if (result == null)
                 {
                     return NotFound($"Could not find any traveller");
                 }

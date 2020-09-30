@@ -9,7 +9,7 @@ namespace spaceparkapi.Dto
     public class ParkingspotDto
     {
         public int Id { get; set; }
-        public Spaceport Spaceport { get; set; }
-        public Spaceship ParkedSpaceship { get; set; }
+        public int SpaceportId { get; set; }
+        public int ParkedSpaceshipId { get; set; }
     }
 }
