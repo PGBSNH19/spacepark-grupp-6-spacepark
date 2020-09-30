@@ -74,6 +74,133 @@ namespace SpaceParkUnitTest
         #region                             SpaceportRepository
 
         [TestMethod]
+        public void GetAvailableParkingspot_ValidDataZeroFree_IsNull()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspot = spaceportRepository.GetAvailableParkingspot(500, 200).Result;
+
+            // Assert
+            Assert.IsNull(freeParkingspot);
+        }
+
+        [TestMethod]
+        public void GetAvailableParkingspot_ValidDataOneFree_ParkingspotIdIs30()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            parkingspots.Add(new Parkingspot(){Id = 30, ParkedSpaceship = null, SpaceportId = 500});
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspot = spaceportRepository.GetAvailableParkingspot(500, 200).Result;
+
+            // Assert
+            Assert.AreEqual(30, freeParkingspot.Id);
+        }
+
+        [TestMethod]
+        public void GetAvailableParkingspot_ValidDataTwoFree_ParkingspotIdIs30()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            parkingspots.Add(new Parkingspot(){Id = 30, ParkedSpaceship = null, SpaceportId = 500});
+            parkingspots.Add(new Parkingspot(){Id = 31, ParkedSpaceship = null, SpaceportId = 500});
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspot = spaceportRepository.GetAvailableParkingspot(500, 200).Result;
+
+            // Assert
+            Assert.AreEqual(30, freeParkingspot.Id);
+        }
+
+        [TestMethod]
+        public void GetAllAvailableParkingspots_ValidData_ParkingspotCountEqualsTwo()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            parkingspots[3].ParkedSpaceship = null;
+            parkingspots.Add(new Parkingspot(){Id = 25, ParkedSpaceship = null});
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspots = spaceportRepository.GetAllAvailableParkingspots(200).Result;
+
+            // Assert
+            Assert.AreEqual(2, freeParkingspots.Count);
+        }
+
+        [TestMethod]
+        public void GetAllAvailableParkingspots_ValidData_ParkingspotCountEqualsZero()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspots = spaceportRepository.GetAllAvailableParkingspots(200).Result;
+
+            // Assert
+            Assert.AreEqual(0, freeParkingspots.Count);
+        }
+
+        [TestMethod]
+        public void GetAllAvailableParkingspots_ValidData_ParkingspotCountEqualsFour()
+        {
+            // Arrange
+            IList<Parkingspot> parkingspots = GenerateParkingspotData();
+
+            parkingspots.Add(new Parkingspot(){Id = 25, ParkedSpaceship = null});
+            parkingspots.Add(new Parkingspot(){Id = 26, ParkedSpaceship = null});
+            parkingspots.Add(new Parkingspot(){Id = 27, ParkedSpaceship = null});
+            parkingspots.Add(new Parkingspot(){Id = 28, ParkedSpaceship = null});
+
+            var spaceshipContextMock = new Mock<SpaceContext>();
+            spaceshipContextMock.Setup(p => p.Parkingspot).ReturnsDbSet(parkingspots);
+
+            var logger = Mock.Of<ILogger<SpaceportRepository>>();
+            var spaceportRepository = new SpaceportRepository(spaceshipContextMock.Object, logger);
+
+            // Act
+            var freeParkingspots = spaceportRepository.GetAllAvailableParkingspots(200).Result;
+
+            // Assert
+            Assert.AreEqual(4, freeParkingspots.Count);
+        }
+
+        [TestMethod]
         public void GetTravellerParkingspots_ValidData_Count2()
         {
             // Arrange
@@ -140,6 +267,8 @@ namespace SpaceParkUnitTest
         #endregion
 
 
+        #region                             Moq data to test against
+
         private IList<Spaceport> GenerateSpaceportData()
         {
             return new List<Spaceport>
@@ -201,7 +330,7 @@ namespace SpaceParkUnitTest
                 },
                 new Parkingspot
                 {
-                    Id = 2,
+                    Id = 3,
                     Spaceport = spaceport,
                     ParkedSpaceship = new Spaceship()
                     {
@@ -225,5 +354,8 @@ namespace SpaceParkUnitTest
                 }
             };
         }
+
+        #endregion
+    
     }
 }
