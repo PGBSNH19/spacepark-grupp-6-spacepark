@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SpaceparkWebApp.Models;
-using SpaceparkWebApp.Services;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,13 +19,11 @@ namespace SpaceparkWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly HelpServices _helpServices;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, HelpServices helpServices)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
-            _helpServices = helpServices;
         }
 
         public string Name { get; set; }
@@ -36,19 +37,34 @@ namespace SpaceparkWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Authenticate(string name)
         {
+            HttpResponseMessage response = null;
+
             try
             {
                 HttpClient _client = new HttpClient();
                 _client.DefaultRequestHeaders.Add("name", "" + name);
                 var url = _configuration["ApiHostUrl"] + "/api/v1.0/traveller/auth";
-                string response = await _client.GetStringAsync(url);
+                response = await _client.GetAsync(url);
 
-                Traveller Traveller = JsonConvert.DeserializeObject<Traveller>(response);
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    TempData["msg"] = "The traveller has not been in a Star Wars movie and is therefore not authorized.";
+                    return RedirectToAction("Index");
+                }
+
+                Traveller Traveller = JsonConvert.DeserializeObject<Traveller>(response.Content.ReadAsStringAsync().Result);
                 return View("Details", Traveller);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                TempData["msg"] = "API program is not running or the person is not from SpacPark database...!";
+                if (response == null)
+                {
+                    TempData["msg"] = "The API did not return any response.";
+                }
+                else
+                {
+                    TempData["msg"] = $"An unexpected error has ocurred: {response.StatusCode.ToString()}";
+                }
                 return RedirectToAction("Index");
             }
         }
@@ -56,12 +72,12 @@ namespace SpaceparkWebApp.Controllers
         public async Task<IActionResult> Park(int id, string name)
         {
             HttpClient _client = new HttpClient();
-            Traveller travellerResult = _helpServices.GetTraveller(name).Result;
+            Traveller travellerResult = GetTraveller(name).Result;
 
             try
             {
                 //Get the first free parking...
-                var spaceship = _helpServices.GetSpaceship(id);
+                var spaceship = GetSpaceship(id);
                 var parkingUrl = _configuration["ApiHostUrl"] + "/api/v1.0/spaceport/getparkingspot/?spaceshipLength=" + (Convert.ToInt32(spaceship.Result.Length)).ToString();
                 string parkResponse = await _client.GetStringAsync(parkingUrl);
                 Parkingspot parking = JsonConvert.DeserializeObject<Parkingspot>(parkResponse);
@@ -91,7 +107,56 @@ namespace SpaceparkWebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Unpark(string Name)
+        public async Task<Parkingspot> GetParking(int spaceshipId)
+        {
+            HttpClient _client = new HttpClient();
+
+            var url = _configuration["ApiHostUrl"] + "/api/v1.0/parkingspot/";
+            string response = await _client.GetStringAsync(url);
+
+            List<Parkingspot> parkingspotResults = JsonConvert.DeserializeObject<List<Parkingspot>>(response);
+            Parkingspot resultparking = parkingspotResults.Where(x => x.ParkedSpaceshipId == spaceshipId).FirstOrDefault();
+            return resultparking;
+        }
+
+        public async Task<IEnumerable<Spaceship>> GetSpaceshipsParking(int TravellerId)
+        {
+            HttpClient _client = new HttpClient();
+
+            var url = _configuration["ApiHostUrl"] + "/api/v1.0/Spaceport/traveller/" + TravellerId;
+            string response = await _client.GetStringAsync(url);
+
+            SpaceshipResults spaceshipResults = JsonConvert.DeserializeObject<SpaceshipResults>(response);
+            return spaceshipResults.results.Where(x => x.Traveller.Id == TravellerId);
+        }
+
+        public async Task<Spaceship> GetSpaceship(int spaceshipId)
+        {
+            HttpClient _client = new HttpClient();
+
+            var url = _configuration["ApiHostUrl"] + "/api/v1.0/Spaceship";
+            string response = await _client.GetStringAsync(url);
+
+            List<Spaceship> spaceshipResults = JsonConvert.DeserializeObject<List<Spaceship>>(response);
+
+            var spaceshipResult = spaceshipResults.Where(x => x.Id == spaceshipId).FirstOrDefault();
+            return spaceshipResult;
+        }
+
+        public async Task<Traveller> GetTraveller(string travellerName)
+        {
+            HttpClient _client = new HttpClient();
+
+            var url = _configuration["ApiHostUrl"] + "/api/v1.0/Traveller";
+            string response = await _client.GetStringAsync(url);
+
+            List<Traveller> ravellerResults = JsonConvert.DeserializeObject<List<Traveller>>(response);
+
+            var travellerResult = ravellerResults.Where(x => x.Name == travellerName).FirstOrDefault();
+            return travellerResult;
+        }
+
+        public IActionResult Unpark(string Name)
         {
             var traveller = "";
             return View("Details", traveller);
