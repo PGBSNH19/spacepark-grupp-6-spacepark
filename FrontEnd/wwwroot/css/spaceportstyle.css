@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #1d1a2a;
+    background-color: #222
 }
 
 .centered-section {
@@ -46,7 +46,7 @@ body {
     height: 40px;
     width: 180px;
     margin-right: 10px;
-    box-shadow: inset 4px 4px 4px #15141e, inset -4px -4px 4px #252135;
+    box-shadow: inset 4px 4px 4px #141414, inset -4px -4px 4px #2f2f2f;
 }
 
 .signin-button {
@@ -56,12 +56,12 @@ body {
     width: 125px;
     cursor: pointer;
     border-radius: 15px;
-    font-size: 15px;
+    font-size: 13px;
     color: #9b9999;
     margin-top: 1.5px;
     text-align: center;
-    background: #252135;
+    background: #414040;
 }
 .signin-button:active {
-    background: #12111a;
+    background: #5a5858;
 }

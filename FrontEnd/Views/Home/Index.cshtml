@@ -6,7 +6,6 @@
 
 <head>
     <link rel="stylesheet" href="~/css/spaceportstyle.css" />
-    <script src="~/js/script.js"></script>
 </head>
 
 <body>
@@ -15,7 +14,8 @@
         <div class="centered-section">
             <div id="logo">SpacePark</div>
             <div class="login-section">
-                @Html.TextBoxFor(model => model.Name, new { @class = "name-input", placeholder = "Firstname" });
+                @Html.TextBoxFor(model => model.Name, new { @class = "name-input", placeholder = "Name", 
+                @spellcheck = "false", @autocomplete = "off" })
                 <button asp-for="submit" class="signin-button">Authenticate</button>
             </div>
         </div>

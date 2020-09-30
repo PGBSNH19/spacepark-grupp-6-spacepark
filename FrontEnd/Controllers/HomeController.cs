@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SpaceparkWebApp.Models;
@@ -12,10 +13,12 @@ namespace SpaceparkWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public string Name { get; set; }
@@ -27,15 +30,13 @@ namespace SpaceparkWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Authenticate(string Name)
+        public async Task<IActionResult> Authenticate(string name)
         {
-            HttpClient _client = new HttpClient();
-
             try
             {
-
-                _client.DefaultRequestHeaders.Add("name", "" + Name);
-                var url = "http://localhost:11725/api/v1.0/traveller/auth";
+                HttpClient _client = new HttpClient();
+                _client.DefaultRequestHeaders.Add("name", "" + name);
+                var url = _configuration["ApiHostUrl"] + "/api/v1.0/traveller/auth";
                 string response = await _client.GetStringAsync(url);
 
                 Traveller Traveller = JsonConvert.DeserializeObject<Traveller>(response);
