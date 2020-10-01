@@ -27,10 +27,10 @@ namespace SpaceParkUnitTest
             var spaceshipRepository = new ParkingspotRepository(spaceshipContextMock.Object, logger);
 
             // Act
-            var parkingspotById = spaceshipRepository.GetParkingSpotInfoById(1).Result;
+            var parkingspotBySpaceshipId = spaceshipRepository.GetParkingSpotInfoById(1).Result;
 
             // Assert
-            Assert.AreEqual("Luke Skywalker", parkingspotById.ParkedSpaceship.Traveller.Name);
+            Assert.AreEqual("Testship One", parkingspotBySpaceshipId.ParkedSpaceship.Name);
         }
 
         [TestMethod]
@@ -45,10 +45,10 @@ namespace SpaceParkUnitTest
             var spaceshipRepository = new ParkingspotRepository(spaceshipContextMock.Object, logger);
 
             // Act
-            var parkingspotById = spaceshipRepository.GetParkingSpotInfoById(2).Result;
+            var parkingspotBySpaceshipId = spaceshipRepository.GetParkingSpotInfoById(2).Result;
 
             // Assert
-            Assert.AreEqual("Anakin Skywalker", parkingspotById.ParkedSpaceship.Traveller.Name);
+            Assert.AreEqual("Testship Two", parkingspotBySpaceshipId.ParkedSpaceship.Name);
         }
 
         [TestMethod]
@@ -302,10 +302,12 @@ namespace SpaceParkUnitTest
                 {
                     Id = 1,
                     Spaceport = spaceport,
+                    ParkedSpaceshipId = 1,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 1,
                         Length = 500,
+                        Name = "Testship One",
                         Traveller = new Traveller()
                         {
                             Id = 1,
@@ -317,10 +319,12 @@ namespace SpaceParkUnitTest
                 {
                     Id = 2,
                     Spaceport = spaceport,
+                    ParkedSpaceshipId = 2,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 2,
                         Length = 800,
+                        Name = "Testship Two",
                         Traveller = new Traveller()
                         {
                             Id = 2,
@@ -332,10 +336,12 @@ namespace SpaceParkUnitTest
                 {
                     Id = 3,
                     Spaceport = spaceport,
+                    ParkedSpaceshipId = 1,
                     ParkedSpaceship = new Spaceship()
                     {
                         Id = 1,
                         Length = 500,
+                        Name = "Testship One",
                         Traveller = new Traveller()
                         {
                             Id = 2,
