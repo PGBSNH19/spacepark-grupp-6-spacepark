@@ -25,7 +25,7 @@ namespace spaceparkapi.Services.Repositories
             _logger.LogInformation($"Getting parkingspot info by Id: {id}");
 
             var query = await _context.Parkingspot
-                    .Where(parkingspot => parkingspot.Id == id)
+                    .Where(parkingspot => parkingspot.ParkedSpaceshipId == id)
                     .Include(parkedSpaceship => parkedSpaceship.ParkedSpaceship)
                     .Include(traveller => traveller.ParkedSpaceship.Traveller)
                     .FirstOrDefaultAsync();

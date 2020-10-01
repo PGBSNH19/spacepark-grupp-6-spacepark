@@ -1,4 +1,4 @@
-﻿@model SpaceparkWebApp.Models.Traveller
+﻿@model SpaceparkWebApp.Controllers.HomeController
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <div class="mb-3">
-        <h1>Traveller Name: @Model.Name</h1>
+        <h1>Traveller Name: @Model.Traveller.Name</h1>
     </div>
     <div class="mt-3">
         <h3>Spaceships List</h3>
@@ -25,45 +25,41 @@
                 <th></th>
             </tr>
 
+            @foreach (var item in Model.Traveller.Spaceships)
+            {
+                var parkspot = Model.GetParking(item.Id);
 
-            @*@foreach (var item in Model.Spaceships)
+                if (parkspot != null && parkspot.Result != null)
                 {
-                    var parkspot = SpaceparkWebApp.Services.HelpServices.GetParking(item.Id);
+                    item.Parking = parkspot.Result.Id.ToString();
+                }
+                else
+                {
+                    item.Parking = "Has no park!";
+                }
 
-                    if (parkspot.Result != null)
-                    {
-                        item.Parking = parkspot.Result.Id.ToString();
-                    }
-                    else
-                    {
-                        item.Parking = "Has no park!";
-                    }
-
-
-
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Length)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Parking)
-                        </td>
-                        <td>
-                            @if (parkspot.Result == null)
-                            {
-                                @Html.ActionLink("Park", "Park", new { id = item.Id , name = Model.Name})
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Unpark", "Unpark", new { id =item.Id, name = Model.Name })
-                            }
-                        </td>
-                    </tr>
-                }*@
-
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Length)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parking)
+                    </td>
+                    <td>
+                        @if (parkspot.Result == null)
+                        {
+                            @Html.ActionLink("Park", "Park", new { id = item.Id, name = Model.Name })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Unpark", "Unpark", new { id = item.Id, name = Model.Name })
+                        }
+                    </td>
+                </tr>
+            }
         </table>
     </div>
 </div>
