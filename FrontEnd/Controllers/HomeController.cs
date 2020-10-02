@@ -110,7 +110,6 @@ namespace SpaceparkWebApp.Controllers
             }
         }
 
-     
         public async Task<IActionResult> Checkout(int parkingId, string travellerName)
         {
             HttpClient _client = new HttpClient();
@@ -136,9 +135,6 @@ namespace SpaceparkWebApp.Controllers
                 return View("Details", travellerResult);
             }
         }
-
-
-
 
         // Service Methods
         //***********************************************************************************************************************************************************
