@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SpaceparkWebApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,12 +24,6 @@ namespace SpaceparkWebApp.Controllers
             _configuration = configuration;
         }
 
-        public string Name { get; set; }
-
-        public Traveller Traveller;
-        public Parkingspot parking;
-        public List<Spaceship> Spaceships;
-
         public ActionResult Index()
         {
             return View();
@@ -48,17 +40,24 @@ namespace SpaceparkWebApp.Controllers
                 _client.DefaultRequestHeaders.Add("name", "" + name);
                 var url = _configuration["ApiHostUrl"] + "/api/v1.0/traveller/auth";
                 response = await _client.GetAsync(url);
+                TempData.Clear();
 
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    TempData["msg"] = "Please enter traveller name.";
+                    return RedirectToAction("Index");
+                }
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     TempData["msg"] = "The traveller has not been in a Star Wars movie and is therefore not authorized.";
                     return RedirectToAction("Index");
                 }
 
-                Traveller = JsonConvert.DeserializeObject<Traveller>(response.Content.ReadAsStringAsync().Result);
-                return View("Edit", this);
+                Traveller Traveller = JsonConvert.DeserializeObject<Traveller>(response.Content.ReadAsStringAsync().Result);
+                Traveller.Parkingspots = GetParking().Result.ToList();
+                return View("Details", Traveller);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (response == null)
                 {
@@ -72,47 +71,82 @@ namespace SpaceparkWebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Park(int id, string name)
+        public async Task<IActionResult> Park(int spaceshipId, string travellerName)
         {
             HttpClient _client = new HttpClient();
-            Traveller travellerResult = GetTraveller(name).Result;
+            var spaceship = GetSpaceship(spaceshipId);
+            int spaceshipLength = Convert.ToInt32(spaceship.Result.Length);
+            Traveller travellerResult = GetTraveller(travellerName).Result;
+            TempData.Clear();
+
+            if (spaceshipLength < 500)
+            {
+                try
+                {
+                    //Get the first free parking...
+                    var parkingUrl = _configuration["ApiHostUrl"] + "/api/v1.0/spaceport/getparkingspot/?spaceshipLength=" + spaceshipLength;
+                    HttpResponseMessage parkResponse = await _client.GetAsync(parkingUrl);
+                    var parking = JsonConvert.DeserializeObject<Parkingspot>(parkResponse.Content.ReadAsStringAsync().Result);
+
+                    var json = JsonConvert.SerializeObject(parking);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    string url = _configuration["ApiHostUrl"] + "/api/v1.0/Parkingspot/park?parkingId=" + parking.Id + "&spaceshipId=" + spaceshipId;
+                    HttpResponseMessage response = await _client.PutAsync(url, content);
+
+                    travellerResult = GetTraveller(travellerName).Result;
+                    return View("Details", travellerResult);
+                }
+                catch (Exception)
+                {
+                    TempData["error"] = "There is no free parkings...!";
+                    return View("Details", travellerResult);
+                } 
+            }
+            else
+            {
+                TempData["error"] = "You can not park here therefore your ship is very long...!";
+                return View("Details", travellerResult);
+            }
+        }
+
+     
+        public async Task<IActionResult> Checkout(int parkingId, string travellerName)
+        {
+            HttpClient _client = new HttpClient();
+            Traveller travellerResult = GetTraveller(travellerName).Result;
 
             try
             {
-                //Get the first free parking...
-                var spaceship = GetSpaceship(id);
-                var parkingUrl = _configuration["ApiHostUrl"] + "/api/v1.0/spaceport/getparkingspot/?spaceshipLength=" + (Convert.ToInt32(spaceship.Result.Length)).ToString();
-                string parkResponse = await _client.GetStringAsync(parkingUrl);
-                var parking = JsonConvert.DeserializeObject<Parkingspot>(parkResponse);
+                var parkings = GetParking().Result.ToList();
+                var parking = parkings.Where(x => x.ParkedSpaceship.Id == parkingId);
 
-                //Park the spaceship in this parking...
-                Parkingspot parkingspot = new Parkingspot()
-                {
-                    SpaceportId = 500,
-                    ParkedSpaceshipId = id
-                };
-
-                var json = JsonConvert.SerializeObject(parkingspot);
-
+                var json = JsonConvert.SerializeObject(parking);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                string url = _configuration["ApiHostUrl"] + "/api/v1.0/parkingspot/parkSpaceship/";
-                var response = await _client.PutAsync(url, content);
+                string url = _configuration["ApiHostUrl"] + "/api/v1.0/Parkingspot/checkout?parkingId=" + parkingId;
+                HttpResponseMessage response = await _client.PutAsync(url, content);
 
-                return View("Edit", travellerResult);
+                travellerResult = GetTraveller(travellerName).Result;
+                return View("Details", travellerResult);
             }
             catch (Exception)
             {
                 TempData["msg"] = "There is something wrong...!";
-                return RedirectToAction("Details", travellerResult);
+                return View("Details", travellerResult);
             }
         }
 
-        public async Task<Parkingspot> GetParking(int spaceshipId)
+
+
+
+        // Service Methods
+        //***********************************************************************************************************************************************************
+        public async Task<List<Parkingspot>> GetParking()
         {
             HttpClient _client = new HttpClient();
 
-            var url = _configuration["ApiHostUrl"] + "/api/v1.0/parkingspot/" + spaceshipId;
+            var url = _configuration["ApiHostUrl"] + "/api/v1.0/parkingspot/";
             var response = await _client.GetAsync(url);
 
             if (response.StatusCode == HttpStatusCode.NotFound)
@@ -120,7 +154,15 @@ namespace SpaceparkWebApp.Controllers
                 return null;
             }
 
-            var parkingspotResults = JsonConvert.DeserializeObject<Parkingspot>(response.Content.ReadAsStringAsync().Result);
+            var parkingspotResults = JsonConvert.DeserializeObject<List<Parkingspot>>(response.Content.ReadAsStringAsync().Result);
+
+            foreach (var park in parkingspotResults)
+            {
+                if (park.ParkedSpaceship == null)
+                {
+                    park.ParkedSpaceship = new Spaceship { Id = 0 };
+                }
+            }
 
             return parkingspotResults;
         }
@@ -159,13 +201,8 @@ namespace SpaceparkWebApp.Controllers
             List<Traveller> ravellerResults = JsonConvert.DeserializeObject<List<Traveller>>(response);
 
             var travellerResult = ravellerResults.Where(x => x.Name == travellerName).FirstOrDefault();
+            travellerResult.Parkingspots = GetParking().Result.ToList();
             return travellerResult;
-        }
-
-        public IActionResult Unpark(string Name)
-        {
-            var traveller = "";
-            return View("Details", traveller);
         }
     }
 }
