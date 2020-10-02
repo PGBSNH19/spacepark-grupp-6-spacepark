@@ -57,7 +57,7 @@ namespace spaceparkapi.Controllers
         {
             try
             {
-                var results = await _travellerRepository.GetAll<Traveller>();
+                var results = await _travellerRepository.GetAll<Traveller>("Spaceships");
                 var mappedResult = _mapper.Map<TravellerDto[]>(results);
 
                 if (results == null)

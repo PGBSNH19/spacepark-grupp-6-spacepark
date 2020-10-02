@@ -27,7 +27,7 @@ namespace spaceparkapi.Controllers
         {
             try
             {
-                var results = await _spaceshipRepository.GetAll<Spaceship>("ParkingSpots");
+                var results = await _spaceshipRepository.GetAll<Spaceship>();
                 var spaceshipResult = _mapper.Map<SpaceshipDto[]>(results);
                 if (results == null)
                 {

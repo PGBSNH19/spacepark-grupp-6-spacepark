@@ -24,7 +24,29 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
-        
+        [HttpGet]
+        public async Task<ActionResult<ParkingspotDto[]>> GetParkings()
+        {
+            try
+            {
+                var results = await _parkingspotRepository.GetAll<Parkingspot>("ParkedSpaceship");
+                var mappedResults = _mapper.Map<ParkingspotDto[]>(results);
+
+                if (mappedResults == null)
+                {
+                    return NotFound($"Could not find any parkingspot");
+                }
+                else
+                {
+                    return Ok(mappedResults);
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ParkingspotDto>> GetParkingspotById(int id)
         {
