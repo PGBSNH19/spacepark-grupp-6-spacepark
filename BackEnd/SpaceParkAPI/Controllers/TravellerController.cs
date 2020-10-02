@@ -62,7 +62,7 @@ namespace spaceparkapi.Controllers
 
                 if (results == null)
                 {
-                    return NotFound($"Could not find any traveller");
+                    return NotFound($"Could not find any traveller.");
                 }
                 return Ok(mappedResult);
             }

@@ -35,7 +35,7 @@ namespace spaceparkapi.Controllers
 
                 if (mappedResult == null)
                 {
-                    return NotFound($"Could not find any parkingspot");
+                    return NotFound($"Could not find any parkingspot.");
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace spaceparkapi.Controllers
 
                 if (mappedResult == null)
                 {
-                    return NotFound($"Could not find any free parkingspot");
+                    return NotFound($"Could not find any free parkingspot.");
                 }
                 else
                 {

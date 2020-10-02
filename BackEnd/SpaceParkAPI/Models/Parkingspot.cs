@@ -12,7 +12,6 @@ namespace spaceparkapi.Models
         [NotMapped]
         public readonly static int MaxLength = 500;
 
-
         public int? SpaceportId  { get; set; }
         [ForeignKey("SpaceportId")]
         public Spaceport Spaceport { get; set; }

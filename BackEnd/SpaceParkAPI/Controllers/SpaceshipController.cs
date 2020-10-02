@@ -31,7 +31,7 @@ namespace spaceparkapi.Controllers
                 var spaceshipResult = _mapper.Map<SpaceshipDto[]>(results);
                 if (results == null)
                 {
-                    return NotFound($"Could not find any spaceship");
+                    return NotFound($"Could not find any spaceship.");
                 }
                 return Ok(spaceshipResult);
             }
