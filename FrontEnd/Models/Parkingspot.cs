@@ -12,5 +12,6 @@ namespace SpaceparkWebApp.Models
         public int Id { get; set; }
         public int SpaceportId { get; set; }
         public int ParkedSpaceshipId { get; set; }
+        public Spaceship ParkedSpaceship { get; set; }
     }
 }

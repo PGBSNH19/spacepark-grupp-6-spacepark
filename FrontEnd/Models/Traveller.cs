@@ -9,6 +9,7 @@ namespace SpaceparkWebApp.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Parkingspot> Parkingspots { get; set; }
         public List<Spaceship> Spaceships { get; set; }
     }
 }
