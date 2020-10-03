@@ -31,12 +31,6 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: AzureKeyVault@1
-      inputs:
-        azureSubscription: 'myResourceGroupConnection'
-        KeyVaultName: 'spaceportvault'
-        SecretsFilter: '*'
-        RunAsPreJob: true   
     - task: DotNetCoreCLI@2
       displayName: Builds our Web API and tests
       inputs:
@@ -44,6 +38,12 @@ stages:
         projects: |
           $(apiFolder)/spaceparkapi.csproj
           $(testFolder)/SpaceParkUnitTest.csproj
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: 'myResourceGroupConnection'
+        KeyVaultName: 'spaceportvault'
+        SecretsFilter: 'ConnectionStrings--AppDatabase'
+        RunAsPreJob: true   
     - task: replacetokens@3
       inputs:
         targetFiles: '**/*.json'
