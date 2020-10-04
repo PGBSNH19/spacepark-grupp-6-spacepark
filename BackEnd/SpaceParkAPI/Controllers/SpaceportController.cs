@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class SpaceportController : ControllerBase
@@ -47,7 +48,6 @@ namespace spaceparkapi.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
         }
-
 
         // Get all free parking spots        /api/v1.0/Spaceport/GetFreeParkingSpots?spaceshipLength=200
         [HttpGet("GetFreeParkingSpots")]
@@ -97,6 +97,7 @@ namespace spaceparkapi.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
         {
             try
