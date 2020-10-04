@@ -41,11 +41,11 @@
 
                 if (parkspot != null)
                 {
-                    item.Parking = parkspot.ParkedSpaceship.Id.ToString();
+                    item.Parking = "Parking No. : " + parkspot.Id.ToString();
                 }
                 else
                 {
-                    item.Parking = "Has no park!";
+                    item.Parking = "Not parked yet!";
                 }
 
                 <tr>
