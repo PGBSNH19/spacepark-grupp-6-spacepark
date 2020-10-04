@@ -11,18 +11,21 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class SpaceshipController : ControllerBase
     {
         private readonly ISpaceshipRepository _spaceshipRepository;
         private readonly IMapper _mapper;
+
         public SpaceshipController(ISpaceshipRepository repository, IMapper mapper)
         {
             _spaceshipRepository = repository;
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<ActionResult<SpaceshipDto[]>> GetSpaceships()
         {
             try

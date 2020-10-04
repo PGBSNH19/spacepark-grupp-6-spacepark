@@ -53,6 +53,7 @@ namespace spaceparkapi.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<ActionResult<TravellerDto[]>> GetTravellers()
         {
             try
