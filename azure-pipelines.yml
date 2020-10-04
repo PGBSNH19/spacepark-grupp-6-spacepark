@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '1f52ecfc-fdbf-494b-b1c6-aae9f2ab4030'
   imageRepository: 'spaceportimageweb'
-  containerRegistry: 'ovning3.azurecr.io'
+  containerRegistry: 'ovning2.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/FrontEnd/DockerFile'
   tag: '$(Build.BuildId)'
   
