@@ -1,3 +1,3 @@
-Vi skapade ett databas diagram med tabeller och tillhörande kolumner.
+Vi skapade ett databas diagram med tabeller och tillhörande kolumner. 
 
 ![](Bilder/databas.jpg)
