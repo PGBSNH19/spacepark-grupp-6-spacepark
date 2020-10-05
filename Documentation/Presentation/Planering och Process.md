@@ -131,5 +131,5 @@ Vi började med att bygga vårat API och där gick det ganska bra att dela upp a
 
 Azure
 
-Azure delen var alla med och försökte att hjälpa till att lösa problemen som upp stod. Här hade vi 5 hjärnor och fixa detta och det gick ganska bra alla kom med 
+Azure gjorde vi tillsammans alla var med och försökte att hjälpa till att lösa problemen som upp stod. Här hade vi 5 hjärnor och fixa detta och det gick väldigt bra alla kom med idé 
 
