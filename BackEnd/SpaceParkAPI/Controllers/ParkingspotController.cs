@@ -26,9 +26,9 @@ namespace spaceparkapi.Controllers
         }
 
         /// <summary>
-        /// Gets a list of parkingspots.
+        /// Retrieves a collection of parkingspots.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An array of parkingspot objects.</returns>
         [HttpGet]
         public async Task<ActionResult<ParkingspotDto[]>> GetParkings()
         {
