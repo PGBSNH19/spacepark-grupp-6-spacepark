@@ -32,9 +32,9 @@ All kommunikation sker genom Discord. Där delade vi skärm för själva kodande
 
 - Atlassian Jira
 
-  
 
 # Diagram och Modeller
+ ![](Bilder/databas.jpg)
 
 ## Traveller : BaseEntity
 
