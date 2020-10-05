@@ -10,7 +10,7 @@ Den tillåter oss skapa och ansluta till vår Spaceport databas, den innehåller
 
 **Azure Container Registry**
 
-Där läggs våra image upp via pipline**.** Används för att lägga till och lagra våra (docker) container images, både för back- och frontend. Detta sker i pipelinen (se pipeline-filen). Detta krävs för att vi ska senare publicera våra applikationer genom tjänsten Azure Container Instance i Release pipeline. 
+Där läggs våra image upp via pipline. Används för att lägga till och lagra våra (docker) container images, både för back- och frontend. Detta sker i pipelinen. Detta krävs för att vi ska senare publicera våra applikationer genom tjänsten Azure Container Instance i Release pipeline. 
 
 **Azure Container Instance**
 
