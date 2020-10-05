@@ -2,8 +2,14 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
+# Only trigger when backend code has been pushed.
 trigger:
-- master
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - 'BackEnd/*'
 
 resources:
 - repo: self
