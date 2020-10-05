@@ -21,12 +21,14 @@ Används för att lägga vår back- och frontend container images uppe på inter
 Key Vault används för att säker hålla våran "connectionstring" till databasen hemlig. När du skapar ett key vault kan du ställa in vad du vill ska hållas hemligt samt välja vilken åtkomstnivå som andra  användare ska ha.
 
 När vi implementerade Key Vault-tjänsten i vårt projekt började med att vi skapade en KeyVault i vår Resource Group i azure . Efter skapandet av vår Key Vault behöver vi lägga till en Secret och dess Value kommer att bevara vår "connectionstring" till databasen. Därefter sker allt i piplinen där filtrerar man vad man vill ha ut exempelvis: vill vi hämta ut conectionstringen så skriver man det där.
+![](Bilder/KeyVault.jpg)
 
 **Application insights**
 
 Med logger ökar säkerhet i koden och man kan ha mer kontroll vad som görs den följer varje steg och dokumenterar. Den uppdaterar också när man ändrar något .
 
 Vi började med att lägga till Application Insights på Azure Portalen. Sen  kopierade vi ut våran "Instrumentation Key", vilket kunde hittas genom att navigera till vår Application Insights resurs i Azure. Vi angav även att vi i vårt fall ville ha en lognivå på "Trace" vilket innebärde den mest detaljerade nivå av logging. Därefter så navigerade vi till vår Application Insights resurs i Azure (Applications Insights resursen -> Monitoring -> Logs)  och nu kan vi  se ändringarna som görs. Man kan även filtrerar om man vill.
+![](Bilder/applicationInsights.jpg)
 
 ### ****Sammanfattning****
 
