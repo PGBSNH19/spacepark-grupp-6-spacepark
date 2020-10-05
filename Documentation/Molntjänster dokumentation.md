@@ -32,7 +32,7 @@ Vi började med att lägga till Application Insights på Azure Portalen. Sen  ko
 
 ### ****Sammanfattning****
 
-Vi använde RazorPages för att bygga frontend, delvis för att en del av gruppen ska använda de på lia men också för att vi ville lära oss ett nytt sätt att hantera frontend. Detta ledde då till att frontend delen tog längre tid. Delvis eftersom vår modell måste hantera två sidor och passa runt information som våra modeller innehåll från sida till sida så att vi kan hantera skeppsparkering och checka ut skepp.
+Vi använde oss av RazorPages i viewen för att bygga frontend, delvis för att en del av gruppen ska använda de på lia men också för att vi ville lära oss ett nytt sätt att hantera frontend. Detta ledde då till att frontend delen tog längre tid. Delvis eftersom vår modell måste hantera två sidor och passa runt information som våra modeller innehåll från sida till sida så att vi kan hantera skeppsparkering och checka ut skepp.
 
 Detta blev så klart  komplicerat vi hade inte räknat med att vi skulle behöva lägga ner så mycket tid på RazorPages. Vi fick läsa på mycket på google samt kolla på youtube och många exempel gjorde inte som vi gjorde. Eftersom RazorPages tog oss mycket tid. Hade det kanske varit bättre att vi skulle hålla oss till något som vi var förstod såsom HTML och JavaScript från början, men eftersom vi kommer att använda det på lian i framtiden bestämde vi oss för att lära oss RazorPages nu.
 
