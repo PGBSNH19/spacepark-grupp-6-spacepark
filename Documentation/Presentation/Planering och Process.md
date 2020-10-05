@@ -41,7 +41,7 @@ All kommunikation sker genom Discord. Där delade vi skärm för själva kodande
 | Namn       | Datatyp         |
 | ---------- | --------------- |
 | Name       | string          |
-| Spaceships | List<Spaceship> |
+| Spaceships | List&lt;Spaceship> |
 
 ## SpaceShip : BaseEntity
 
@@ -65,7 +65,7 @@ All kommunikation sker genom Discord. Där delade vi skärm för själva kodande
 | Namn         | Datatyp           |
 | ------------ | ----------------- |
 | Name         | string            |
-| ParkingSpots | List<Parkingspot> |
+| ParkingSpots | List&lt;Parkingspot> |
 
 ## BaseEntity
 
@@ -131,5 +131,5 @@ Vi började med att bygga vårat API och där gick det ganska bra att dela upp a
 
 Azure
 
-Azure gjorde vi tillsammans alla var med och försökte att hjälpa till att lösa problemen som upp stod. Här hade vi 5 hjärnor och fixa detta och det gick väldigt bra alla kom med idé 
+Azure moln tjänst gjorde vi tillsammans (Nor var våran Driver) alla var med och försökte att hjälpa till att lösa problemen som upp stod. Här hade vi 5 hjärnor och fixa detta och det gick väldigt bra alla kom med idé 
 
