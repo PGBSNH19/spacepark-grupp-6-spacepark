@@ -26,7 +26,7 @@ namespace spaceparkapi.Controllers
         }
 
         /// <summary>
-        /// hejjadlnal lakda
+        /// Gets a list of parkingspots.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
