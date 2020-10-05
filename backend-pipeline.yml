@@ -6,7 +6,7 @@
 trigger:
   branches:
     include:
-      - '*'
+      - 'master'
   paths:
     include:
       - 'BackEnd/*'
