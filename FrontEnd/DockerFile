@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 ENV ASPNETCORE_URLS=http://+:80
 WORKDIR /app
 
-# Copy Web project folder
+# Copy Web project folder 
 COPY ./ ./
 
 # Publish our Web to a new folder
