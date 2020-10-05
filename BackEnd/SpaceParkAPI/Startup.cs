@@ -79,7 +79,7 @@ namespace spaceparkapi
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spaceship API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spacepark API V.1.0");
 
                 // To serve SwaggerUI at application's root page, set the RoutePrefix property to an empty string.
                 c.RoutePrefix = string.Empty;
