@@ -136,8 +136,6 @@ namespace SpaceparkWebApp.Controllers
             }
         }
 
-        // Service Methods
-        //***********************************************************************************************************************************************************
         public async Task<List<Parkingspot>> GetParking()
         {
             HttpClient _client = new HttpClient();
