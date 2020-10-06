@@ -12,6 +12,7 @@ using spaceparkapi.Services.Interfaces;
 
 namespace spaceparkapi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class ParkingspotController : ControllerBase
@@ -26,7 +27,7 @@ namespace spaceparkapi.Controllers
         }
 
         /// <summary>
-        /// Gets a list of parkingspots.
+        /// Gets all parkingspots.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -52,6 +53,10 @@ namespace spaceparkapi.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets parkingspot by id.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<ParkingspotDto>> GetParkingspotById(int id)
         {
@@ -75,7 +80,13 @@ namespace spaceparkapi.Controllers
             }
         }
 
-        // Checkout a parked spaceship using only the parkingspot id. (spacePortId is optional)        /api/v1.0/Parkingspot/checkout?parkingId=1&spacePortId=500
+        /// <summary>
+        /// Checkout a parked spaceship using only the parkingspot id. (spacePortId is optional).
+        /// </summary>
+        /// <param name="parkingId"></param>
+        /// <param name="spacePortId"></param>
+        /// <returns></returns>
+        // /api/v1.0/Parkingspot/checkout?parkingId=1&spacePortId=500
         [HttpPut("checkout")]
         public async Task<ActionResult> CheckoutParkedSpaceship(int parkingId, int spacePortId = 500)
         {
@@ -96,7 +107,14 @@ namespace spaceparkapi.Controllers
             }
         }
 
-        // Park a spaceship using the parkingspot id and spaceship id. (spacePortId is optional)     /api/v1.0/Parkingspot/park?parkingId=1&spaceshipId=1&spacePortId=500
+        /// <summary>
+        /// Park a spaceship using the parkingspot id and spaceship id. (spacePortId is optional).
+        /// </summary>
+        /// <param name="parkingId"></param>
+        /// <param name="spaceshipId"></param>
+        /// <param name="spacePortId"></param>
+        /// <returns></returns>
+        //  /api/v1.0/Parkingspot/park?parkingId=1&spaceshipId=1&spacePortId=500
         [HttpPut("park")]
         public async Task<ActionResult> ParkSpaceship(int parkingId, int spaceshipId, int spacePortId = 500)
         {

@@ -25,6 +25,10 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets all spaceships.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<SpaceshipDto[]>> GetSpaceships()
         {

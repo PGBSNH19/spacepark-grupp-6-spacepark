@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>spaceparkapi</name>
+    </assembly>
+    <members>
+        <member name="M:spaceparkapi.Controllers.ParkingspotController.GetParkings">
+            <summary>
+            Gets all parkingspots.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.ParkingspotController.GetParkingspotById(System.Int32)">
+            <summary>
+            Gets parkingspot by id.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:spaceparkapi.Controllers.ParkingspotController.CheckoutParkedSpaceship(System.Int32,System.Int32)">
+            <summary>
+            Checkout a parked spaceship using only the parkingspot id. (spacePortId is optional).
+            </summary>
+            <param name="parkingId"></param>
+            <param name="spacePortId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.ParkingspotController.ParkSpaceship(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Park a spaceship using the parkingspot id and spaceship id. (spacePortId is optional).
+            </summary>
+            <param name="parkingId"></param>
+            <param name="spaceshipId"></param>
+            <param name="spacePortId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.SpaceportController.GetSpaceports">
+            <summary>
+            Gets all spaceports.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.SpaceportController.GetAvailableParkingspot(System.Int32,System.Int32)">
+            <summary>
+            Gets first free parkingspot.
+            </summary>
+            <param name="spaceshipLength"></param>
+            <param name="spaceportId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.SpaceportController.GetAllAvailableParkingspots(System.Int32)">
+            <summary>
+            Gets all free parking spots.
+            </summary>
+            <param name="spaceshipLength"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.SpaceportController.GetTravellerParkingspots(System.Int32)">
+            <summary>
+            Gets all parked spaceships by traveller id.
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.SpaceshipController.GetSpaceships">
+            <summary>
+            Gets all spaceships.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.TravellerController.AuthenticateTraveller(System.String)">
+            <summary>
+            Check if traveller is famous by name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:spaceparkapi.Controllers.TravellerController.GetTravellers">
+            <summary>
+            Gets all travellers
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
