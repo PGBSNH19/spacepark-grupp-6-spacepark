@@ -1,0 +1,15 @@
+### Lärdomar
+
+Vi använde oss av RazorPages i viewen för att bygga frontend, delvis för att en del av gruppen ska använda de på lia men också för att vi ville lära oss ett nytt sätt att hantera frontend. Detta ledde då till att frontend delen tog längre tid. Delvis eftersom vår modell måste hantera två sidor och passa runt information som våra modeller innehåll från sida till sida så att vi kan hantera skeppsparkering och checka ut skepp.
+
+Detta blev så klart komplicerat vi hade inte räknat med att vi skulle behöva lägga ner så mycket tid på RazorPages. Vi fick läsa på mycket på google samt kolla på youtube och många exempel gjorde inte som vi gjorde. Eftersom RazorPages tog oss mycket tid. Hade det kanske varit bättre att vi skulle hålla oss till något som vi var förstod såsom HTML och JavaScript från början, men eftersom vi kommer att använda det på lian i framtiden bestämde vi oss för att lära oss RazorPages nu.
+
+Det vi är mest nöjda med är att RazorPages fungera normalt man kan skicka / hämta information mellan frontend och backend. Molndelen tog inte lågt tid den var väldigt smidig och snabb. Det är främst RazorPages som vi är mycket stolta över att vi lyckades med.
+
+Hade vi haft mer tid skulle vi haft en tredje sida det hade varit snyggt och kanske göra det möjligt för användaren att kunna betala och få ett kvitto. Samt utveckla molndelen vi hade velat lägga till private link, blob storage men tiden räckte inte åt.
+
+**Vad skulle vi gjort annorlunda**
+
+Inte lägga mycket tid på att koda projektet. Istället fokusera på vår molnlösningen och dokumentation. Detta ledde då  till att vi inte kunde lägga till ytterligare tjänster för vår projekt i molnet. Såsom Azure Private link, blob storage eller mer dockumentation som user case. 
+
+Hur viktigt det är med dokumentation är något vi tar med oss att man kommer mycket längre om man har en bra dokumentation från början. Vi hade behövt göra den mer precis så att vi vet redan innan vi börjar koda hur vi ska gå till vägar.  Då hade man undvikit att lägga ner tid på att planera under projektets gång.
