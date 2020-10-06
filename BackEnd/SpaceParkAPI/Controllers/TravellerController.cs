@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace spaceparkapi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class TravellerController : ControllerBase
@@ -23,6 +24,11 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Check if traveller is famous by name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("Auth")]
         public async Task<ActionResult<TravellerDto>> AuthenticateTraveller([FromHeader] string name)
         {
@@ -53,6 +59,10 @@ namespace spaceparkapi.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets all travellers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<TravellerDto[]>> GetTravellers()
         {

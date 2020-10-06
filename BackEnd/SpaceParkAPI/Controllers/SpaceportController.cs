@@ -25,7 +25,37 @@ namespace spaceparkapi.Controllers
             _mapper = mapper;
         }
 
-        // Get first free parkingspot                        /api/v1.0/Spaceport/GetParkingSpot?spaceshipLength=200
+        /// <summary>
+        /// Gets all spaceports.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
+        {
+            try
+            {
+                var results = await _spaceportRepository.GetAll<Spaceport>("ParkingSpots");
+                var spaceportResult = _mapper.Map<SpaceportDto[]>(results);
+
+                if (results == null)
+                {
+                    return NotFound($"Could not find any spaceport");
+                }
+                return Ok(spaceportResult);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Gets first free parkingspot.
+        /// </summary>
+        /// <param name="spaceshipLength"></param>
+        /// <param name="spaceportId"></param>
+        /// <returns></returns>
+        //  /api/v1.0/Spaceport/GetParkingSpot?spaceshipLength=200
         [HttpGet("GetParkingSpot")]
         public async Task<ActionResult<ParkingspotDto>> GetAvailableParkingspot(int spaceshipLength, int spaceportId = 500)
         {
@@ -49,7 +79,12 @@ namespace spaceparkapi.Controllers
             }
         }
 
-        // Get all free parking spots        /api/v1.0/Spaceport/GetFreeParkingSpots?spaceshipLength=200
+        /// <summary>
+        /// Gets all free parking spots.
+        /// </summary>
+        /// <param name="spaceshipLength"></param>
+        /// <returns></returns>
+        //  /api/v1.0/Spaceport/GetFreeParkingSpots?spaceshipLength=200
         [HttpGet("GetFreeParkingSpots")]
         public async Task<ActionResult<IList<ParkingspotDto>>> GetAllAvailableParkingspots(int spaceshipLength)
         {
@@ -73,7 +108,12 @@ namespace spaceparkapi.Controllers
             }
         }
 
-        // Get all parked spaceships by traveller ID        /api/v1.0/Spaceport/traveller?id=1
+        /// <summary>
+        /// Gets all parked spaceships by traveller id.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        //  /api/v1.0/Spaceport/traveller?id=1
         [HttpGet("traveller")]
         public async Task<ActionResult<IList<ParkingspotDto>>> GetTravellerParkingspots(int Id)
         {
@@ -94,26 +134,6 @@ namespace spaceparkapi.Controllers
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<SpaceportDto[]>> GetSpaceports()
-        {
-            try
-            {
-                var results = await _spaceportRepository.GetAll<Spaceport>("ParkingSpots");
-                var spaceportResult = _mapper.Map<SpaceportDto[]>(results);
-
-                if (results == null)
-                {
-                    return NotFound($"Could not find any spaceport");
-                }
-                return Ok(spaceportResult);
-            }
-            catch (Exception e)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
             }
         }
     }
