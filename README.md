@@ -14,4 +14,4 @@
 
 [5. Struktur av molnet](Documentation/5.%20Struktur%20av%20molnet.md)
 
-[6. Lärdomar.md](Documentation/6.%20Lärdomar.md)
+[6. Lärdomar](Documentation/6.%20Lärdomar.md)
