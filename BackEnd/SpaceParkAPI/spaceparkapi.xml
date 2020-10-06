@@ -6,7 +6,7 @@
     <members>
         <member name="M:spaceparkapi.Controllers.ParkingspotController.GetParkings">
             <summary>
-            Gets all parkingspots..
+            Gets all parkingspots.
             </summary>
             <returns></returns>
         </member>
