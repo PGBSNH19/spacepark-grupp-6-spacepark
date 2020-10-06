@@ -126,4 +126,4 @@ Vi tog de som det kom, det är något som vi tar med oss till nästa projekt att
 Azure moln tjänst gjorde vi tillsammans (Nor var våran Driver) alla var med och försökte att hjälpa till att lösa problemen som upp stod. Här hade vi 5 hjärnor och fixa detta och det gick väldigt bra alla kom med idé 
 
 ## Jira Issues
-
+https://github.com/PGBSNH19/spacepark-grupp-6-spacepark/blob/master/Documentation/Bilder/Jira_Issues.pdf
